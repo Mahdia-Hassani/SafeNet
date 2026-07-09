@@ -3,6 +3,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import Card from "../components/ui/Card";
 import StatCard from "../components/dashboard/StatCard";
 import dashboardStats from "../data/dashboardStats";
+import RecentAnalyses from "../components/dashboard/RecentAnalyses";
 
 function Dashboard() {
   return (
@@ -22,6 +23,7 @@ function Dashboard() {
           ))}
         </div>
       </div>
+      <RecentAnalyses />
     </DashboardLayout>
   );
 }
