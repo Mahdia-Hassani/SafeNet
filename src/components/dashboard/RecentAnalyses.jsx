@@ -5,36 +5,28 @@ const analyses = [
     id: 1,
     title: "Fake Bank Email",
     risk: "High Risk",
-    date: "2 hours ago",
   },
   {
     id: 2,
     title: "Suspicious Delivery SMS",
     risk: "Medium Risk",
-    date: "Yesterday",
   },
 ];
 
 function RecentAnalyses() {
   return (
     <Card>
-      <h2 className="text-xl font-semibold">Recent Scam Analyses</h2>
+      <h2 className="mb-4 text-lg font-semibold">Recent Scam Analyses</h2>
 
-      <div className="mt-4 space-y-4">
-        {analyses.map((item) => (
+      <div className="space-y-3">
+        {analyses.map((analysis) => (
           <div
-            key={item.id}
-            className="flex items-center justify-between rounded-lg border p-4"
+            key={analysis.id}
+            className="flex items-center justify-between rounded-lg border p-3"
           >
-            <div>
-              <h3 className="font-medium">{item.title}</h3>
+            <span>{analysis.title}</span>
 
-              <p className="text-sm text-slate-500">{item.date}</p>
-            </div>
-
-            <span className="rounded-full bg-red-100 px-3 py-1 text-sm text-red-600">
-              {item.risk}
-            </span>
+            <span className="text-sm text-red-600">{analysis.risk}</span>
           </div>
         ))}
       </div>

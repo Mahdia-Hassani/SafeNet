@@ -1,36 +1,121 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
+import {
+  LayoutDashboard,
+  ShieldAlert,
+  BookOpen,
+  Target,
+  Settings,
+  User,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+
 const navItems = [
-  { name: "Dashboard", path: "/dashboard" },
-  { name: "Scam Analyzer", path: "/analyzer" },
-  { name: "Learning Center", path: "/learning" },
-  { name: "Threat Simulation", path: "/simulation" },
-  { name: "Settings", path: "/settings" },
-  { name: "Profile", path: "/profile" },
+  {
+    name: "Dashboard",
+    path: "/dashboard",
+    icon: LayoutDashboard,
+  },
+  {
+    name: "Scam Analyzer",
+    path: "/analyzer",
+    icon: ShieldAlert,
+  },
+  {
+    name: "Learning Center",
+    path: "/learning",
+    icon: BookOpen,
+  },
+  {
+    name: "Threat Simulation",
+    path: "/simulation",
+    icon: Target,
+  },
+  {
+    name: "Settings",
+    path: "/settings",
+    icon: Settings,
+  },
+  {
+    name: "Profile",
+    path: "/profile",
+    icon: User,
+  },
 ];
 
 function Sidebar() {
-  return (
-    <aside className="w-64 border-r bg-white p-6">
-      <h1 className="mb-8 text-2xl font-bold text-blue-600">SafeNet</h1>
+  const [collapsed, setCollapsed] = useState(false);
 
-      <nav className="space-y-2">
-        {navItems.map((item) => (
-          <NavLink
-            key={item.path}
-            to={item.path}
-            className={({ isActive }) =>
-              `block rounded-xl px-4 py-3 transition ${
-                isActive
-                  ? "bg-blue-50 text-blue-600 font-medium"
-                  : "text-slate-600 hover:bg-slate-100"
-              }`
-            }
+  return (
+    <aside
+      className={`
+        sticky top-0 h-screen border-r bg-white transition-all duration-300
+        ${collapsed ? "w-20" : "w-64"}
+      `}
+    >
+      <div className="flex h-full flex-col">
+        {/* Header */}
+        <div className="flex items-center justify-between border-b p-4">
+          {!collapsed && (
+            <h1 className="text-xl font-bold text-blue-600">SafeNet</h1>
+          )}
+
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className="rounded-lg p-2 hover:bg-slate-100"
           >
-            {item.name}
-          </NavLink>
-        ))}
-      </nav>
+            {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+          </button>
+        </div>
+
+        {/* Navigation */}
+        <nav className="flex-1 p-3">
+          <div className="space-y-1">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+
+              return (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `
+                    flex items-center gap-3 rounded-xl px-3 py-3 transition-all
+                    ${
+                      isActive
+                        ? "bg-blue-50 text-blue-600"
+                        : "text-slate-600 hover:bg-slate-100"
+                    }
+                  `
+                  }
+                >
+                  <Icon size={20} />
+
+                  {!collapsed && (
+                    <span className="font-medium">{item.name}</span>
+                  )}
+                </NavLink>
+              );
+            })}
+          </div>
+        </nav>
+
+        {/* Footer */}
+        <div className="border-t p-4">
+          {collapsed ? (
+            <div className="flex justify-center">
+              <User size={22} />
+            </div>
+          ) : (
+            <div>
+              <p className="font-medium text-slate-800">SafeNet User</p>
+              <p className="text-sm text-slate-500">Cybersecurity Learner</p>
+            </div>
+          )}
+        </div>
+      </div>
     </aside>
   );
 }
