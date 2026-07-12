@@ -2,16 +2,26 @@ import { useEffect, useState } from "react";
 
 import Card from "../ui/Card";
 
-import { getAnalyses } from "../../utils/storage";
+import { getAnalyses, deleteAnalysis } from "../../utils/storage";
 
 function RecentAnalyses() {
   const [analyses, setAnalyses] = useState([]);
 
-  useEffect(() => {
-    const savedAnalyses = getAnalyses();
+  function loadAnalyses() {
+    const data = getAnalyses();
 
-    setAnalyses(savedAnalyses.slice(0, 5));
+    setAnalyses(data.slice(0, 5));
+  }
+
+  useEffect(() => {
+    loadAnalyses();
   }, []);
+
+  function handleDelete(id) {
+    deleteAnalysis(id);
+
+    loadAnalyses();
+  }
 
   return (
     <Card>
@@ -32,17 +42,36 @@ function RecentAnalyses() {
                 p-3
               "
             >
-              <span className="truncate">{analysis.content}</span>
+              <div className="max-w-[70%]">
+                <p className="truncate font-medium">{analysis.content}</p>
 
-              <span
-                className="
-                  text-sm
-                  font-medium
-                  text-red-600
-                "
-              >
-                {analysis.riskLevel}
-              </span>
+                <p className="text-xs text-slate-500">
+                  {new Date(analysis.analyzedAt).toLocaleDateString()}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span
+                  className="
+                    text-sm
+                    font-medium
+                    text-red-600
+                  "
+                >
+                  {analysis.riskLevel}
+                </span>
+
+                <button
+                  onClick={() => handleDelete(analysis.id)}
+                  className="
+                    text-sm
+                    text-slate-400
+                    hover:text-red-600
+                  "
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>

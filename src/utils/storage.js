@@ -13,3 +13,11 @@ export function saveAnalysis(analysis) {
 
   localStorage.setItem(ANALYSES_KEY, JSON.stringify(analyses));
 }
+
+export function deleteAnalysis(id) {
+  const analyses = getAnalyses();
+
+  const updatedAnalyses = analyses.filter((analysis) => analysis.id !== id);
+
+  localStorage.setItem(ANALYSES_KEY, JSON.stringify(updatedAnalyses));
+}
