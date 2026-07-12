@@ -19,3 +19,9 @@ export function completeLesson(id) {
 export function getCompletedLessonsCount() {
   return getCompletedLessons().length;
 }
+
+export function getLearningProgress(totalLessons) {
+  const completed = getCompletedLessons().length;
+
+  return Math.round((completed / totalLessons) * 100);
+}

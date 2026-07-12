@@ -4,24 +4,28 @@ import StatCard from "../components/dashboard/StatCard";
 import SecurityTip from "../components/dashboard/SecurityTip";
 import RecentAnalyses from "../components/dashboard/RecentAnalyses";
 
-import { calculateSafetyScore } from "../utils/calculateSafetyScore";
-import { getCompletedLessonsCount } from "../utils/learningStorage";
-
 import { ShieldCheck, BookOpen, Target, ShieldAlert } from "lucide-react";
 
 import useAnalyses from "../hooks/useAnalyses";
+import lessons from "../data/lesson";
+
+import {
+  getCompletedLessonsCount,
+  getLearningProgress,
+} from "../utils/learningStorage";
 
 function Dashboard() {
   const analyses = useAnalyses();
+
   const completedLessons = getCompletedLessonsCount();
 
-  const safetyScore = calculateSafetyScore(analyses);
+  const learningProgress = getLearningProgress(lessons.length);
 
   const dashboardStats = [
     {
       id: 1,
       title: "Safety Score",
-      value: `${safetyScore}%`,
+      value: `${learningProgress}%`,
       icon: ShieldCheck,
     },
     {
