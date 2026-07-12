@@ -6,9 +6,7 @@ function useAnalyses() {
   const [analyses, setAnalyses] = useState([]);
 
   useEffect(() => {
-    const data = getAnalyses();
-
-    setAnalyses(data);
+    setAnalyses(getAnalyses());
   }, []);
 
   return analyses;
