@@ -5,6 +5,7 @@ import SecurityTip from "../components/dashboard/SecurityTip";
 import RecentAnalyses from "../components/dashboard/RecentAnalyses";
 
 import { calculateSafetyScore } from "../utils/calculateSafetyScore";
+import { getCompletedLessonsCount } from "../utils/learningStorage";
 
 import { ShieldCheck, BookOpen, Target, ShieldAlert } from "lucide-react";
 
@@ -12,6 +13,7 @@ import useAnalyses from "../hooks/useAnalyses";
 
 function Dashboard() {
   const analyses = useAnalyses();
+  const completedLessons = getCompletedLessonsCount();
 
   const safetyScore = calculateSafetyScore(analyses);
 
@@ -25,7 +27,7 @@ function Dashboard() {
     {
       id: 2,
       title: "Completed Lessons",
-      value: 0,
+      value: completedLessons,
       icon: BookOpen,
     },
     {

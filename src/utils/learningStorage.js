@@ -15,3 +15,7 @@ export function completeLesson(id) {
     localStorage.setItem(COMPLETED_LESSONS_KEY, JSON.stringify(completed));
   }
 }
+
+export function getCompletedLessonsCount() {
+  return getCompletedLessons().length;
+}
