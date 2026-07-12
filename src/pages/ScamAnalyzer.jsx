@@ -12,7 +12,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import Button from "../components/ui/Button";
 
 import { saveAnalysis } from "../utils/storage";
-import AnalysisResult from "../components/analyzer/AnalysisResult";
+import { useNavigate } from "react-router-dom";
 import mockAnalysis from "../data/mockAnalysis";
 
 function ScamAnalyzer() {
@@ -21,9 +21,7 @@ function ScamAnalyzer() {
   const [message, setMessage] = useState("");
   const [url, setUrl] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
-
-  const [showResult, setShowResult] = useState(false);
-
+  const navigate = useNavigate();
   const tabs = [
     {
       id: "message",
@@ -43,7 +41,20 @@ function ScamAnalyzer() {
   ];
 
   function handleAnalyze() {
-    setShowResult(true);
+    if (activeTab === "message" && !message.trim()) {
+      alert("Please enter a message.");
+      return;
+    }
+
+    if (activeTab === "url" && !url.trim()) {
+      alert("Please enter a URL.");
+      return;
+    }
+
+    if (activeTab === "file" && !selectedFile) {
+      alert("Please select a file.");
+      return;
+    }
 
     const content =
       activeTab === "message"
@@ -59,6 +70,8 @@ function ScamAnalyzer() {
 
       riskLevel: mockAnalysis.riskLevel,
 
+      explanation: mockAnalysis.explanation,
+
       indicators: mockAnalysis.indicators,
 
       recommendation: mockAnalysis.recommendation,
@@ -68,12 +81,11 @@ function ScamAnalyzer() {
 
     saveAnalysis(analysis);
 
-    console.log("Saved:", analysis);
+    navigate(`/analysis/${analysis.id}`);
   }
 
   function handleTabChange(tabId) {
     setActiveTab(tabId);
-    setShowResult(false);
   }
 
   return (
@@ -235,14 +247,6 @@ function ScamAnalyzer() {
         <p className="mt-8 text-center text-sm text-slate-500">
           All analysis is private and secure. Your data will not be shared.
         </p>
-
-        {/* Result */}
-
-        {showResult && (
-          <div className="mt-10">
-            <AnalysisResult analysis={mockAnalysis} />
-          </div>
-        )}
       </div>
     </DashboardLayout>
   );
