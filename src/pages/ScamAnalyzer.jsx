@@ -11,6 +11,7 @@ import {
 import DashboardLayout from "../layouts/DashboardLayout";
 import Button from "../components/ui/Button";
 
+import { saveAnalysis } from "../utils/storage";
 import AnalysisResult from "../components/analyzer/AnalysisResult";
 import mockAnalysis from "../data/mockAnalysis";
 
@@ -44,11 +45,30 @@ function ScamAnalyzer() {
   function handleAnalyze() {
     setShowResult(true);
 
-    console.log({
-      message,
-      url,
-      selectedFile,
-    });
+    const content =
+      activeTab === "message"
+        ? message
+        : activeTab === "url"
+          ? url
+          : selectedFile?.name || "Uploaded File";
+
+    const analysis = {
+      id: Date.now(),
+
+      content,
+
+      riskLevel: mockAnalysis.riskLevel,
+
+      indicators: mockAnalysis.indicators,
+
+      recommendation: mockAnalysis.recommendation,
+
+      analyzedAt: new Date().toISOString(),
+    };
+
+    saveAnalysis(analysis);
+
+    console.log("Saved:", analysis);
   }
 
   function handleTabChange(tabId) {
