@@ -11,8 +11,17 @@ import {
 import DashboardLayout from "../layouts/DashboardLayout";
 import Button from "../components/ui/Button";
 
+import AnalysisResult from "../components/analyzer/AnalysisResult";
+import mockAnalysis from "../data/mockAnalysis";
+
 function ScamAnalyzer() {
   const [activeTab, setActiveTab] = useState("message");
+
+  const [message, setMessage] = useState("");
+  const [url, setUrl] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const [showResult, setShowResult] = useState(false);
 
   const tabs = [
     {
@@ -31,6 +40,21 @@ function ScamAnalyzer() {
       icon: FileText,
     },
   ];
+
+  function handleAnalyze() {
+    setShowResult(true);
+
+    console.log({
+      message,
+      url,
+      selectedFile,
+    });
+  }
+
+  function handleTabChange(tabId) {
+    setActiveTab(tabId);
+    setShowResult(false);
+  }
 
   return (
     <DashboardLayout>
@@ -56,16 +80,16 @@ function ScamAnalyzer() {
               return (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => handleTabChange(tab.id)}
                   className={`
-            relative flex items-center gap-2 py-4
-            transition-all duration-200
-            ${
-              activeTab === tab.id
-                ? "text-blue-600"
-                : "text-slate-500 hover:text-slate-700"
-            }
-                `}
+                    relative flex items-center gap-2 py-4
+                    transition-all duration-200
+                    ${
+                      activeTab === tab.id
+                        ? "text-blue-600"
+                        : "text-slate-500 hover:text-slate-700"
+                    }
+                  `}
                 >
                   <Icon size={20} />
 
@@ -74,13 +98,10 @@ function ScamAnalyzer() {
                   {activeTab === tab.id && (
                     <span
                       className="
-                absolute
-                bottom-0
-                left-0
-                w-full
-                h-[2px]
-                bg-blue-600
-              "
+                        absolute bottom-0 left-0
+                        h-[2px] w-full
+                        bg-blue-600
+                      "
                     />
                   )}
                 </button>
@@ -89,10 +110,17 @@ function ScamAnalyzer() {
           </div>
         </div>
 
-        {/* Content */}
+        {/* Hero Section */}
 
         <div className="mt-8 text-center">
-          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border-2 border-blue-100 bg-blue-50">
+          <div
+            className="
+              mx-auto flex h-20 w-20
+              items-center justify-center
+              rounded-full border-2
+              border-blue-100 bg-blue-50
+            "
+          >
             <ShieldCheck size={34} className="text-blue-600" />
           </div>
 
@@ -115,17 +143,18 @@ function ScamAnalyzer() {
           </p>
         </div>
 
-        {/* Dynamic Input */}
+        {/* Inputs */}
 
         <div className="mt-8">
           {activeTab === "message" && (
             <textarea
-              rows="6"
+              rows={6}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               placeholder="Paste suspicious content here..."
               className="
                 w-full rounded-xl border
-                border-slate-200
-                p-5
+                border-slate-200 p-5
                 outline-none
                 focus:border-blue-500
               "
@@ -135,11 +164,12 @@ function ScamAnalyzer() {
           {activeTab === "url" && (
             <input
               type="text"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
               placeholder="https://example.com"
               className="
                 w-full rounded-xl border
-                border-slate-200
-                p-5
+                border-slate-200 p-5
                 outline-none
                 focus:border-blue-500
               "
@@ -149,30 +179,50 @@ function ScamAnalyzer() {
           {activeTab === "file" && (
             <div
               className="
-                rounded-xl border-2 border-dashed
-                border-slate-300
+                rounded-xl border-2
+                border-dashed border-slate-300
                 p-12 text-center
               "
             >
-              <input type="file" />
+              <input
+                type="file"
+                onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+              />
+
+              {selectedFile && (
+                <p className="mt-4 text-sm text-slate-600">
+                  Selected: {selectedFile.name}
+                </p>
+              )}
             </div>
           )}
         </div>
 
-        {/* Button */}
+        {/* Analyze Button */}
 
         <div className="mt-6 flex justify-center">
-          <Button className="flex items-center gap-2 px-8 py-3">
+          <Button
+            onClick={handleAnalyze}
+            className="flex items-center gap-2 px-8 py-3"
+          >
             <Search size={18} />
             Analyze Content
           </Button>
         </div>
 
-        {/* Footer Note */}
+        {/* Footer */}
 
         <p className="mt-8 text-center text-sm text-slate-500">
           All analysis is private and secure. Your data will not be shared.
         </p>
+
+        {/* Result */}
+
+        {showResult && (
+          <div className="mt-10">
+            <AnalysisResult analysis={mockAnalysis} />
+          </div>
+        )}
       </div>
     </DashboardLayout>
   );
