@@ -1,14 +1,19 @@
 import { Clock, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function LessonCard({ lesson }) {
+  const navigate = useNavigate();
+
   return (
     <div
+      onClick={() => navigate(`/learning/${lesson.id}`)}
       className="
         overflow-hidden
         rounded-2xl
         border
         border-slate-200
         bg-white
+        cursor-pointer
         transition
         hover:-translate-y-1
         hover:shadow-md
