@@ -3,7 +3,7 @@ import { useState } from "react";
 import DashboardLayout from "../layouts/DashboardLayout";
 
 import quizzes from "../data/quizzes";
-
+import { saveQuizResult } from "../utils/quizStorage";
 import QuizQuestion from "../components/quiz/QuizQuestion";
 
 function ThreatSimulation() {
@@ -23,13 +23,27 @@ function ThreatSimulation() {
       return;
     }
 
-    if (selectedAnswer === question.correctAnswer) {
-      setScore((prev) => prev + 1);
-    }
+    const isCorrect = selectedAnswer === question.correctAnswer;
+
+    const newScore = isCorrect ? score + 1 : score;
 
     if (currentQuestion === quizzes.length - 1) {
+      saveQuizResult({
+        id: Date.now(),
+        score: newScore,
+        total: quizzes.length,
+        completedAt: new Date().toISOString(),
+      });
+
+      setScore(newScore);
+
       setQuizFinished(true);
+
       return;
+    }
+
+    if (isCorrect) {
+      setScore(newScore);
     }
 
     setCurrentQuestion((prev) => prev + 1);

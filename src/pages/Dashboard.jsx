@@ -3,10 +3,13 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import StatCard from "../components/dashboard/StatCard";
 import SecurityTip from "../components/dashboard/SecurityTip";
 import RecentAnalyses from "../components/dashboard/RecentAnalyses";
+import LearningProgress from "../components/dashboard/LearningProgress";
+import Achievements from "../components/dashboard/Achievements";
 
 import { ShieldCheck, BookOpen, Target, ShieldAlert } from "lucide-react";
 
 import useAnalyses from "../hooks/useAnalyses";
+
 import lessons from "../data/lesson";
 
 import {
@@ -14,10 +17,14 @@ import {
   getLearningProgress,
 } from "../utils/learningStorage";
 
+import { getCompletedQuizzesCount } from "../utils/quizStorage";
+
 function Dashboard() {
   const analyses = useAnalyses();
 
   const completedLessons = getCompletedLessonsCount();
+
+  const completedQuizzes = getCompletedQuizzesCount();
 
   const learningProgress = getLearningProgress(lessons.length);
 
@@ -37,7 +44,7 @@ function Dashboard() {
     {
       id: 3,
       title: "Completed Quizzes",
-      value: 0,
+      value: completedQuizzes,
       icon: Target,
     },
     {
@@ -74,11 +81,18 @@ function Dashboard() {
           ))}
         </div>
 
+        {/* Learning Progress */}
+
+        <LearningProgress />
+
+        {/* Achievements */}
+
+        <Achievements />
+
         {/* Content */}
 
         <div className="grid gap-6 lg:grid-cols-2">
           <RecentAnalyses />
-
           <SecurityTip />
         </div>
       </div>
