@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   MessageSquare,
@@ -11,9 +12,8 @@ import {
 import DashboardLayout from "../layouts/DashboardLayout";
 import Button from "../components/ui/Button";
 
+import { analyzeThreat } from "../services/openRouter";
 import { saveAnalysis } from "../utils/storage";
-import { useNavigate } from "react-router-dom";
-import mockAnalysis from "../data/mockAnalysis";
 
 function ScamAnalyzer() {
   const [activeTab, setActiveTab] = useState("message");
@@ -21,7 +21,12 @@ function ScamAnalyzer() {
   const [message, setMessage] = useState("");
   const [url, setUrl] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
+
   const tabs = [
     {
       id: "message",
@@ -40,7 +45,7 @@ function ScamAnalyzer() {
     },
   ];
 
-  function handleAnalyze() {
+  async function handleAnalyze() {
     if (activeTab === "message" && !message.trim()) {
       alert("Please enter a message.");
       return;
@@ -61,31 +66,40 @@ function ScamAnalyzer() {
         ? message
         : activeTab === "url"
           ? url
-          : selectedFile?.name || "Uploaded File";
+          : selectedFile.name;
 
-    const analysis = {
-      id: Date.now(),
+    try {
+      setLoading(true);
+      setError("");
 
-      content,
+      const aiResponse = await analyzeThreat(content);
 
-      riskLevel: mockAnalysis.riskLevel,
+      const analysis = {
+        id: Date.now(),
 
-      explanation: mockAnalysis.explanation,
+        content,
 
-      indicators: mockAnalysis.indicators,
+        riskLevel: aiResponse.riskLevel,
 
-      recommendation: mockAnalysis.recommendation,
+        explanation: aiResponse.explanation,
 
-      analyzedAt: new Date().toISOString(),
-    };
+        indicators: aiResponse.indicators,
 
-    saveAnalysis(analysis);
+        recommendation: aiResponse.recommendation,
 
-    navigate(`/analysis/${analysis.id}`);
-  }
+        analyzedAt: new Date().toISOString(),
+      };
 
-  function handleTabChange(tabId) {
-    setActiveTab(tabId);
+      saveAnalysis(analysis);
+
+      navigate(`/analysis/${analysis.id}`);
+    } catch (error) {
+      console.error(error);
+
+      setError("AI analysis failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -96,9 +110,8 @@ function ScamAnalyzer() {
         <div className="text-center">
           <h1 className="text-3xl font-bold text-slate-900">Scam Analyzer</h1>
 
-          <p className="mt-4 text-base text-slate-500">
-            Analyze suspicious messages, URLs and files to identify potential
-            threats.
+          <p className="mt-4 text-slate-500">
+            Analyze suspicious messages, URLs and files to identify threats.
           </p>
         </div>
 
@@ -112,70 +125,38 @@ function ScamAnalyzer() {
               return (
                 <button
                   key={tab.id}
-                  onClick={() => handleTabChange(tab.id)}
+                  onClick={() => setActiveTab(tab.id)}
                   className={`
                     relative flex items-center gap-2 py-4
-                    transition-all duration-200
-                    ${
-                      activeTab === tab.id
-                        ? "text-blue-600"
-                        : "text-slate-500 hover:text-slate-700"
-                    }
+                    ${activeTab === tab.id ? "text-blue-600" : "text-slate-500"}
                   `}
                 >
                   <Icon size={20} />
 
-                  <span className="font-medium">{tab.label}</span>
-
-                  {activeTab === tab.id && (
-                    <span
-                      className="
-                        absolute bottom-0 left-0
-                        h-[2px] w-full
-                        bg-blue-600
-                      "
-                    />
-                  )}
+                  <span>{tab.label}</span>
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* Hero Section */}
+        {/* Icon */}
 
         <div className="mt-8 text-center">
           <div
             className="
               mx-auto flex h-20 w-20
               items-center justify-center
-              rounded-full border-2
-              border-blue-100 bg-blue-50
+              rounded-full
+              bg-blue-50
+              text-blue-600
             "
           >
-            <ShieldCheck size={34} className="text-blue-600" />
+            <ShieldCheck size={34} />
           </div>
-
-          <h2 className="mt-6 text-xl font-semibold">
-            {activeTab === "message" && "Paste suspicious content here"}
-
-            {activeTab === "url" && "Enter suspicious URL"}
-
-            {activeTab === "file" && "Upload file for analysis"}
-          </h2>
-
-          <p className="mt-2 text-slate-500">
-            {activeTab === "message" &&
-              "Emails, SMS, chat messages and other text content"}
-
-            {activeTab === "url" &&
-              "Check suspicious websites before opening them"}
-
-            {activeTab === "file" && "Upload PDF, DOCX or other files"}
-          </p>
         </div>
 
-        {/* Inputs */}
+        {/* Input */}
 
         <div className="mt-8">
           {activeTab === "message" && (
@@ -186,8 +167,7 @@ function ScamAnalyzer() {
               placeholder="Paste suspicious content here..."
               className="
                 w-full rounded-xl border
-                border-slate-200 p-5
-                outline-none
+                p-5 outline-none
                 focus:border-blue-500
               "
             />
@@ -195,58 +175,42 @@ function ScamAnalyzer() {
 
           {activeTab === "url" && (
             <input
-              type="text"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="https://example.com"
               className="
                 w-full rounded-xl border
-                border-slate-200 p-5
-                outline-none
+                p-5 outline-none
                 focus:border-blue-500
               "
             />
           )}
 
           {activeTab === "file" && (
-            <div
-              className="
-                rounded-xl border-2
-                border-dashed border-slate-300
-                p-12 text-center
-              "
-            >
-              <input
-                type="file"
-                onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
-              />
-
-              {selectedFile && (
-                <p className="mt-4 text-sm text-slate-600">
-                  Selected: {selectedFile.name}
-                </p>
-              )}
-            </div>
+            <input
+              type="file"
+              onChange={(e) => setSelectedFile(e.target.files[0])}
+            />
           )}
         </div>
 
-        {/* Analyze Button */}
+        {/* Error */}
+
+        {error && <p className="mt-4 text-center text-red-500">{error}</p>}
+
+        {/* Button */}
 
         <div className="mt-6 flex justify-center">
           <Button
             onClick={handleAnalyze}
+            disabled={loading}
             className="flex items-center gap-2 px-8 py-3"
           >
             <Search size={18} />
-            Analyze Content
+
+            {loading ? "Analyzing..." : "Analyze Content"}
           </Button>
         </div>
-
-        {/* Footer */}
-
-        <p className="mt-8 text-center text-sm text-slate-500">
-          All analysis is private and secure. Your data will not be shared.
-        </p>
       </div>
     </DashboardLayout>
   );

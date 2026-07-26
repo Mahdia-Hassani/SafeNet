@@ -1,27 +1,53 @@
-const COMPLETED_LESSONS_KEY = "safenet_completed_lessons";
+export const LEARNING_KEY = "safenet_learning";
 
-export function getCompletedLessons() {
-  const data = localStorage.getItem(COMPLETED_LESSONS_KEY);
-
-  return data ? JSON.parse(data) : [];
-}
 
 export function completeLesson(id) {
-  const completed = getCompletedLessons();
+
+  const completed =
+    JSON.parse(
+      localStorage.getItem(LEARNING_KEY)
+    ) || [];
+
 
   if (!completed.includes(id)) {
     completed.push(id);
-
-    localStorage.setItem(COMPLETED_LESSONS_KEY, JSON.stringify(completed));
   }
+
+
+  localStorage.setItem(
+    LEARNING_KEY,
+    JSON.stringify(completed)
+  );
+
 }
+
+
 
 export function getCompletedLessonsCount() {
-  return getCompletedLessons().length;
+
+  const completed =
+    JSON.parse(
+      localStorage.getItem(LEARNING_KEY)
+    ) || [];
+
+
+  return completed.length;
+
 }
 
-export function getLearningProgress(totalLessons) {
-  const completed = getCompletedLessons().length;
 
-  return Math.round((completed / totalLessons) * 100);
+
+export function getLearningProgress(totalLessons) {
+
+  const completed =
+    getCompletedLessonsCount();
+
+
+  if(totalLessons === 0) return 0;
+
+
+  return Math.round(
+    (completed / totalLessons) * 100
+  );
+
 }

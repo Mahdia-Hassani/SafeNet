@@ -1,19 +1,23 @@
-const QUIZZES_KEY = "safenet_quizzes";
-
-export function getCompletedQuizzes() {
-  const data = localStorage.getItem(QUIZZES_KEY);
-
-  return data ? JSON.parse(data) : [];
-}
+export const QUIZ_KEY = "safenet_quizzes";
 
 export function saveQuizResult(result) {
-  const quizzes = getCompletedQuizzes();
+  const quizzes = JSON.parse(localStorage.getItem(QUIZ_KEY)) || [];
 
-  quizzes.unshift(result);
+  quizzes.push(result);
 
-  localStorage.setItem(QUIZZES_KEY, JSON.stringify(quizzes));
+  localStorage.setItem(QUIZ_KEY, JSON.stringify(quizzes));
 }
 
 export function getCompletedQuizzesCount() {
-  return getCompletedQuizzes().length;
+  const quizzes = JSON.parse(localStorage.getItem(QUIZ_KEY)) || [];
+
+  return quizzes.length;
+}
+
+export function getQuizResults() {
+  return JSON.parse(localStorage.getItem(QUIZ_KEY)) || [];
+}
+
+export function clearQuizResults() {
+  localStorage.removeItem(QUIZ_KEY);
 }
