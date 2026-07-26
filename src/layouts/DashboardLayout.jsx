@@ -1,4 +1,5 @@
 import Sidebar from "../components/dashboard/Sidebar";
+import Assistant from "../components/assistant/Assistant";
 
 function DashboardLayout({ children }) {
   return (
@@ -6,6 +7,7 @@ function DashboardLayout({ children }) {
       <Sidebar />
 
       <main className="flex-1 p-8">{children}</main>
+      <Assistant />
     </div>
   );
 }
