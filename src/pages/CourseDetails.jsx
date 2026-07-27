@@ -1,75 +1,54 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import DashboardLayout from "../layouts/DashboardLayout";
 
+import CourseHero from "../components/course/CourseHero";
+import CourseTabs from "../components/course/CourseTabs";
+import Curriculum from "../components/course/Curriculum";
+import Resources from "../components/course/Resources";
+import Quiz from "../components/course/Quiz";
+
 import lessons from "../data/lesson";
-import { completeLesson } from "../utils/learningStorage";
 
 function CourseDetails() {
   const { id } = useParams();
 
-  const lesson = lessons.find((item) => item.id === Number(id));
+  const lesson = lessons.find((lesson) => lesson.id === Number(id));
 
-  function handleComplete() {
-    completeLesson(lesson.id);
-
-    alert("Lesson completed!");
-  }
+  const [activeTab, setActiveTab] = useState("curriculum");
 
   if (!lesson) {
     return (
       <DashboardLayout>
-        <p>Course not found.</p>
+        <div className="flex min-h-[60vh] items-center justify-center">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold">Course Not Found</h2>
+
+            <p className="mt-2 text-slate-500">
+              The requested course could not be found.
+            </p>
+          </div>
+        </div>
       </DashboardLayout>
     );
   }
 
   return (
     <DashboardLayout>
-      <div className="mx-auto max-w-4xl">
-        {/* Image Placeholder */}
+      <div className="mx-auto w-full max-w-7xl space-y-8 px-6 py-8">
+        {/* Hero */}
+        <CourseHero lesson={lesson} />
 
-        <div
-          className="
-            h-72
-            rounded-2xl
-            bg-slate-100
-          "
-        />
-
-        {/* Title */}
-
-        <h1 className="mt-8 text-3xl font-bold">{lesson.title}</h1>
-
-        {/* Description */}
-
-        <p className="mt-4 text-slate-500">{lesson.description}</p>
+        {/* Tabs */}
+        <CourseTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
         {/* Content */}
+        {activeTab === "curriculum" && <Curriculum lesson={lesson} />}
 
-        <div className="mt-8 rounded-2xl border p-6">
-          <h2 className="text-xl font-semibold">Course Content</h2>
+        {activeTab === "resources" && <Resources lesson={lesson} />}
 
-          <p className="mt-4 text-slate-600">{lesson.content}</p>
-        </div>
-
-        {/* Complete Button */}
-
-        <button
-          onClick={handleComplete}
-          className="
-            mt-6
-            rounded-xl
-            bg-blue-600
-            px-5
-            py-3
-            text-white
-            transition
-            hover:bg-blue-700
-          "
-        >
-          Complete Course
-        </button>
+        {activeTab === "quiz" && <Quiz lesson={lesson} />}
       </div>
     </DashboardLayout>
   );

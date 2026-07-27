@@ -9,7 +9,6 @@ import ThreatSimulation from "../pages/ThreatSimulation";
 import Settings from "../pages/Settings";
 import Profile from "../pages/Profile";
 import CourseDetails from "../pages/CourseDetails";
-import SecurityCoach from "../pages/SecurityCoach";
 
 function AppRoutes() {
   return (
@@ -21,7 +20,6 @@ function AppRoutes() {
       <Route path="/learning" element={<LearningCenter />} />
       <Route path="/learning/:id" element={<CourseDetails />} />
       <Route path="/simulation" element={<ThreatSimulation />} />
-      <Route path="/coach" element={<SecurityCoach />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/profile" element={<Profile />} />
     </Routes>

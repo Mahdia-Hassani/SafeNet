@@ -36,11 +36,6 @@ const navItems = [
     path: "/simulation",
     icon: Target,
   },
-  {
-    name: "Security Coach",
-    path: "/coach",
-    icon: Shield,
-  },
 ];
 
 function Sidebar() {
