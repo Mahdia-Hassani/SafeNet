@@ -5,63 +5,52 @@ import { useNavigate } from "react-router-dom";
 function LessonCard({ lesson }) {
   const navigate = useNavigate();
 
-  // بعداً این مقدار از LocalStorage یا Supabase می‌آید
   const progress = lesson.progress || 0;
 
   return (
-    <div
+    <article
       onClick={() => navigate(`/learning/${lesson.id}`)}
       className="
         group
         overflow-hidden
-        rounded-3xl
-        bg-white
-        shadow-sm
+        rounded-1xl
+        bg-card
+        cursor-pointer
         transition-all
         duration-300
         hover:-translate-y-1
-        hover:shadow-xl
-        cursor-pointer
+        hover:shadow-lg
       "
     >
-      {/* Image */}
+      {/* Course Image */}
 
-      <div className="relative">
-        <div
+      <div className="relative overflow-hidden">
+        <img
+          src={lesson.image}
+          alt={lesson.title}
           className="
-            flex
-            h-56
-            items-center
-            justify-center
-            bg-slate-100
+            h-52
+            w-full
+            object-cover
+            transition-transform
+            duration-500
+            group-hover:scale-105
           "
-        >
-          <img
-            src={lesson.image}
-            alt={lesson.title}
-            className="
-                  h-56
-                  w-full
-                  object-cover
-              "
-          />
-        </div>
-
-        {/* Level Badge */}
+        />
 
         <span
           className="
             absolute
-            left-5
-            top-5
+            left-4
+            top-4
             rounded-full
-            bg-white
+            bg-background/80
             px-3
             py-1
             text-xs
             font-medium
-            text-blue-600
-            shadow
+            text-text-primary
+            backdrop-blur
           "
         >
           {lesson.level}
@@ -71,60 +60,99 @@ function LessonCard({ lesson }) {
       {/* Content */}
 
       <div className="space-y-5 p-6">
+        {/* Category + Duration */}
+
+        <div className="flex items-center justify-between">
+          <span
+            className="
+              rounded-full
+              bg-primary/10
+              px-3
+              py-1
+              text-xs
+              font-medium
+              text-primary
+            "
+          >
+            {lesson.category}
+          </span>
+
+          <div className="flex items-center gap-1 text-sm text-text-secondary">
+            <Clock size={15} />
+
+            {lesson.duration}
+          </div>
+        </div>
+
+        {/* Title */}
+
         <div>
           <h3
             className="
               text-xl
               font-semibold
-              transition
-              group-hover:text-blue-600
+              text-text-primary
+              transition-colors
+              group-hover:text-primary
             "
           >
             {lesson.title}
           </h3>
 
-          <p className="mt-2 text-sm leading-6 text-slate-500">
+          <p
+            className="
+              mt-3
+              line-clamp-3
+              text-sm
+              leading-6
+              text-text-secondary
+            "
+          >
             {lesson.description}
           </p>
         </div>
 
-        {/* Meta */}
+        {/* Lessons */}
 
-        <div className="flex flex-wrap gap-5 text-sm text-slate-500">
-          <div className="flex items-center gap-2">
-            <Clock size={16} />
-
-            {lesson.duration}
-          </div>
-
-          <div className="flex items-center gap-2">
-            <BookOpen size={16} />
-            {lesson.lessons} Lessons
-          </div>
+        <div
+          className="
+            flex
+            items-center
+            gap-2
+            text-sm
+            text-text-secondary
+          "
+        >
+          <BookOpen size={16} />
+          {lesson.lessons} Lessons
         </div>
-
-        {/* Category */}
-
-        <div className="text-sm text-slate-400">{lesson.category}</div>
 
         {/* Progress */}
 
         <div>
           <div className="mb-2 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <BarChart3 size={15} className="text-blue-600" />
+              <BarChart3 size={15} className="text-primary" />
 
-              <span className="text-sm font-medium">Progress</span>
+              <span className="text-sm font-medium text-text-primary">
+                Progress
+              </span>
             </div>
 
-            <span className="text-sm font-semibold text-blue-600">
+            <span className="text-sm font-semibold text-primary">
               {progress}%
             </span>
           </div>
 
-          <div className="h-2 rounded-full bg-slate-200">
+          <div className="h-2 rounded-full bg-background">
             <div
-              className="h-2 rounded-full bg-blue-600 transition-all"
+              className="
+                h-2
+                rounded-full
+                bg-primary
+                transition-all
+                duration-500
+              "
               style={{
                 width: `${progress}%`,
               }}
@@ -132,25 +160,35 @@ function LessonCard({ lesson }) {
           </div>
         </div>
 
-        {/* Button */}
+        {/* Footer */}
 
-        <button
+        <div
           className="
             flex
             items-center
-            gap-2
-            font-semibold
-            text-blue-600
-            transition
-            group-hover:gap-3
+            justify-between
+            pt-2
           "
         >
-          {progress > 0 ? "Continue Learning" : "Start Course"}
+          <button
+            className="
+              flex
+              items-center
+              gap-2
+              text-sm
+              font-semibold
+              text-primary
+              transition-all
+              group-hover:gap-3
+            "
+          >
+            {progress > 0 ? "Continue" : "Start Course"}
 
-          <ArrowRight size={18} />
-        </button>
+            <ArrowRight size={18} />
+          </button>
+        </div>
       </div>
-    </div>
+    </article>
   );
 }
 

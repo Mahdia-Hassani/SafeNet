@@ -1,66 +1,119 @@
-import { Clock3, BookOpen, BadgeCheck } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Clock3, BookOpen, Play } from "lucide-react";
 
 function CourseHero({ lesson }) {
   return (
-    <div className="grid gap-8 lg:grid-cols-[1.1fr_1fr]">
+    <section
+      className="
+        grid
+        gap-8
+        lg:grid-cols-2
+        items-center
+      "
+    >
       {/* Image */}
-      <div className="overflow-hidden rounded-3xl bg-white shadow-sm">
-        <img
-          src={lesson.image}
-          alt={lesson.title}
-          className="h-full min-h-[320px] w-full object-cover"
-        />
+
+      <div
+        className="
+          h-[280px]
+          sm:h-[360px]
+          lg:h-[420px]
+          overflow-hidden
+          bg-surface
+          shadow-[0_8px_25px_rgba(0,0,0,0.08)]
+        "
+      >
+        {lesson.image ? (
+          <img
+            src={lesson.image}
+            alt={lesson.title}
+            className="
+              h-full
+              w-full
+              object-cover
+            "
+          />
+        ) : (
+          <div
+            className="
+              flex
+              h-full
+              items-center
+              justify-center
+              text-text-secondary
+            "
+          >
+            Course Image
+          </div>
+        )}
       </div>
 
-      {/* Details */}
-      <div className="flex flex-col justify-center rounded-3xl bg-white p-8 shadow-sm">
-        <p className="text-sm font-medium text-blue-600">SafeNet Academy</p>
+      {/* Content */}
 
-        <h1 className="mt-3 text-4xl font-bold text-slate-900">
+      <div>
+        <h1
+          className="
+            text-3xl
+            sm:text-4xl
+            font-bold
+            text-text-primary
+          "
+        >
           {lesson.title}
         </h1>
 
-        <div className="mt-4 flex flex-wrap gap-4 text-sm text-slate-500">
-          <span className="flex items-center gap-2">
-            <BadgeCheck size={16} />
-            {lesson.level}
-          </span>
-
-          <span className="flex items-center gap-2">
-            <Clock3 size={16} />
-            {lesson.duration}
-          </span>
-
-          <span className="flex items-center gap-2">
-            <BookOpen size={16} />
-            {lesson.lessons} Lessons
-          </span>
-        </div>
-
-        <p className="mt-5 max-w-xl leading-7 text-slate-600">
+        <p
+          className="
+            mt-5
+            leading-7
+            text-text-secondary
+          "
+        >
           {lesson.description}
         </p>
 
-        <div className="mt-8">
-          <button
-            onClick={() => navigate(`/learning/${lesson.id}`)}
-            className="
-    rounded-xl
-    bg-blue-600
-    px-6
-    py-3
-    font-medium
-    text-white
-    transition
-    hover:bg-blue-700
-  "
-          >
-            Continue Learning
-          </button>
+        {/* Info */}
+
+        <div
+          className="
+            mt-6
+            flex
+            flex-wrap
+            gap-6
+            text-sm
+            text-text-secondary
+          "
+        >
+          <div className="flex items-center gap-2">
+            <Clock3 size={18} />
+            {lesson.duration || "2 Hours"}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <BookOpen size={18} />
+            {lesson.lessons || 5} Lessons
+          </div>
         </div>
+
+        <button
+          className="
+            mt-8
+            flex
+            items-center
+            gap-2
+            bg-primary
+            px-8
+            py-3
+            text-white
+            shadow-sm
+            transition
+            hover:bg-primary-hover
+          "
+        >
+          <Play size={18} />
+          Continue Lesson
+        </button>
       </div>
-    </div>
+    </section>
   );
 }
 

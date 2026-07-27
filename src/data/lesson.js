@@ -93,7 +93,7 @@ const lessons = [
 
     category: "Account Safety",
 
-    image: "/images/password.jpg",
+    image: "/images/PasswordSecurity.jpg",
 
     video: "https://www.youtube.com/embed/3NjQ9b3pgIg",
 
@@ -167,7 +167,7 @@ const lessons = [
 
     category: "Web Safety",
 
-    image: "/images/safe-browsing.jpg",
+    image: "/images/SafeBrowsing.jpg",
 
     video: "https://www.youtube.com/embed/yLJqD2Bk6vs",
 
@@ -257,7 +257,7 @@ const lessons = [
 
     category: "Human Risk",
 
-    image: "/images/social-engineering.jpg",
+    image: "/images/SocialEngineering.jpg",
 
     video: "https://www.youtube.com/embed/Vo1urF6S4x8",
 
@@ -346,7 +346,7 @@ const lessons = [
 
     category: "Device Security",
 
-    image: "/images/malware.jpg",
+    image: "/images/MalwareProtection.jpg",
 
     video: "https://www.youtube.com/embed/NMYbkzjI5EY",
 
@@ -439,7 +439,7 @@ const lessons = [
 
     category: "Privacy",
 
-    image: "/images/privacy.jpg",
+    image: "/images/OnlinePrivacy.jpg",
 
     video: "https://www.youtube.com/embed/wVyu7NB7W6Y",
 

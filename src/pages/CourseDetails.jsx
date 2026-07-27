@@ -21,11 +21,32 @@ function CourseDetails() {
   if (!lesson) {
     return (
       <DashboardLayout>
-        <div className="flex min-h-[60vh] items-center justify-center">
+        <div
+          className="
+            min-h-[60vh]
+            flex
+            items-center
+            justify-center
+            px-6
+          "
+        >
           <div className="text-center">
-            <h2 className="text-2xl font-bold">Course Not Found</h2>
+            <h2
+              className="
+                text-3xl
+                font-bold
+                text-text-primary
+              "
+            >
+              Course Not Found
+            </h2>
 
-            <p className="mt-2 text-slate-500">
+            <p
+              className="
+                mt-3
+                text-text-secondary
+              "
+            >
               The requested course could not be found.
             </p>
           </div>
@@ -36,20 +57,45 @@ function CourseDetails() {
 
   return (
     <DashboardLayout>
-      <div className="mx-auto w-full max-w-7xl space-y-8 px-6 py-8">
-        {/* Hero */}
-        <CourseHero lesson={lesson} />
+      <main
+        className="
+          w-full
+          px-4
+          py-6
 
-        {/* Tabs */}
-        <CourseTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+          sm:px-6
 
-        {/* Content */}
-        {activeTab === "curriculum" && <Curriculum lesson={lesson} />}
+          lg:px-8
+        "
+      >
+        <div
+          className="
+            space-y-10
+          "
+        >
+          {/* Hero Section */}
 
-        {activeTab === "resources" && <Resources lesson={lesson} />}
+          <CourseHero lesson={lesson} />
 
-        {activeTab === "quiz" && <Quiz lesson={lesson} />}
-      </div>
+          {/* Tabs */}
+
+          <CourseTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+
+          {/* Content Area */}
+
+          <div
+            className="
+              min-h-[400px]
+            "
+          >
+            {activeTab === "curriculum" && <Curriculum lesson={lesson} />}
+
+            {activeTab === "resources" && <Resources lesson={lesson} />}
+
+            {activeTab === "quiz" && <Quiz lesson={lesson} />}
+          </div>
+        </div>
+      </main>
     </DashboardLayout>
   );
 }

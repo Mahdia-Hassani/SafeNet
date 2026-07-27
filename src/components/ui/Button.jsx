@@ -11,14 +11,15 @@ function Button({
       onClick={onClick}
       disabled={disabled}
       className={`
-        rounded-xl
-        bg-blue-600
+        rounded-md
+        bg-[var(--primary)]
         px-4
         py-2
         font-medium
         text-white
-        transition
-        hover:bg-blue-700
+        transition-all
+        duration-200
+        hover:bg-[var(--primary-hover)]
         disabled:cursor-not-allowed
         disabled:opacity-50
         ${className}
