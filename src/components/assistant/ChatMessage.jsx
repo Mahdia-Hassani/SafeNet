@@ -6,27 +6,87 @@ function ChatMessage({ sender, message }) {
   return (
     <div
       className={`
-        mb-4
+        mb-5
         flex
+        items-end
+        gap-3
+
         ${isUser ? "justify-end" : "justify-start"}
       `}
     >
+      {!isUser && (
+        <div
+          className="
+            flex
+            h-10
+            w-10
+            shrink-0
+            items-center
+            justify-center
+
+            rounded-xl
+
+            bg-primary
+            text-white
+          "
+        >
+          <ShieldCheck size={18} />
+        </div>
+      )}
+
       <div
         className={`
-          max-w-[85%]
-          whitespace-pre-wrap
-          rounded-2xl
-          px-4
-          py-3
-          text-sm
-          leading-6
-          shadow-sm
+          max-w-[80%]
 
-          ${isUser ? "bg-blue-600 text-white" : "bg-slate-100 text-slate-700"}
+          border
+
+          px-5
+          py-4
+
+          text-sm
+          leading-7
+
+          transition
+
+          ${
+            isUser
+              ? `
+                border-primary
+                bg-primary
+                text-white
+              `
+              : `
+                border-border
+                bg-card
+                text-text-primary
+              `
+          }
         `}
       >
-        {message}
+        <p className="whitespace-pre-wrap break-words">{message}</p>
       </div>
+
+      {isUser && (
+        <div
+          className="
+            flex
+            h-10
+            w-10
+            shrink-0
+            items-center
+            justify-center
+
+            rounded-xl
+
+            border
+            border-border
+
+            bg-card
+          "
+        >
+          <User size={18} className="text-text-primary" />
+        </div>
+      )}
     </div>
   );
 }

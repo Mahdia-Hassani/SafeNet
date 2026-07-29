@@ -33,10 +33,15 @@ function AssistantWindow({ open, onClose, messages, loading, sendMessage }) {
         max-h-[680px]
 
         overflow-hidden
-        rounded-3xl
-        bg-white
 
-        shadow-[0_20px_60px_rgba(0,0,0,.18)]
+        rounded-2xl
+
+        border
+        border-border
+
+        bg-card
+
+        shadow-sm
 
         transition-all
         duration-300
@@ -56,34 +61,91 @@ function AssistantWindow({ open, onClose, messages, loading, sendMessage }) {
           flex
           items-center
           justify-between
-          bg-blue-600
+
+          border-b
+          border-border
+
+          bg-card
+
           px-5
           py-4
-          text-white
         "
       >
         <div>
-          <h2 className="font-semibold">SafeNet Assistant</h2>
+          <h2
+            className="
+              font-semibold
+              text-text-primary
+            "
+          >
+            SafeNet Assistant
+          </h2>
 
-          <p className="text-xs text-blue-100">AI Cybersecurity Coach</p>
+          <p
+            className="
+              mt-1
+              text-xs
+              text-text-secondary
+            "
+          >
+            AI Cybersecurity Coach
+          </p>
         </div>
 
-        <button onClick={onClose}>
-          <X size={20} />
+        <button
+          onClick={onClose}
+          className="
+            rounded-lm
+            p-2
+            text-text-secondary
+            transition
+            hover:bg-surface
+            hover:text-text-primary
+          "
+        >
+          <X size={18} />
         </button>
       </div>
 
       {/* Messages */}
 
-      <div className="flex-1 overflow-y-auto p-5">
+      <div
+        className="
+          flex-1
+          overflow-y-auto
+          bg-surface
+          p-5
+        "
+      >
         {messages.length === 0 ? (
           <>
             {/* Welcome */}
 
-            <div className="rounded-2xl bg-slate-100 p-4">
-              <p className="font-semibold">Hello Ali 👋</p>
+            <div
+              className="
+                border
+                border-border
+                bg-card
+                p-5
+              "
+            >
+              <h3
+                className="
+                  font-semibold
+                  text-text-primary
+                "
+              >
+                Welcome 👋
+              </h3>
 
-              <p className="mt-2 text-sm text-slate-600">
+              <p
+                className="
+                  mt-3
+                  text-sm
+                  leading-7
+                  text-text-secondary
+                "
+              >
                 I'm SafeNet Assistant. Ask me anything about cybersecurity,
                 phishing, malware, passwords or online safety.
               </p>
@@ -91,10 +153,28 @@ function AssistantWindow({ open, onClose, messages, loading, sendMessage }) {
 
             {/* Suggestions */}
 
-            <div className="mt-6 space-y-2">
+            <div className="mt-6 space-y-3">
               <button
                 onClick={() => sendMessage("Is this email a phishing scam?")}
-                className="w-full rounded-xl bg-slate-100 p-3 text-left transition hover:bg-slate-200"
+                className="
+                  w-full
+
+                  border
+                  border-border
+
+                  bg-card
+
+                  p-4
+
+                  text-left
+                  text-sm
+                  text-text-primary
+
+                  transition
+
+                  hover:border-primary/30
+                  hover:bg-primary
+                "
               >
                 Is this email a phishing scam?
               </button>
@@ -103,7 +183,25 @@ function AssistantWindow({ open, onClose, messages, loading, sendMessage }) {
                 onClick={() =>
                   sendMessage("How can I create a strong password?")
                 }
-                className="w-full rounded-xl bg-slate-100 p-3 text-left transition hover:bg-slate-200"
+                className="
+                  w-full
+
+                  border
+                  border-border
+
+                  bg-card
+
+                  p-4
+
+                  text-left
+                  text-sm
+                  text-text-primary
+
+                  transition
+
+                  hover:border-primary/30
+                  hover:bg-primary
+                "
               >
                 How can I create a strong password?
               </button>
@@ -114,7 +212,25 @@ function AssistantWindow({ open, onClose, messages, loading, sendMessage }) {
                     "What should I do after clicking a suspicious link?",
                   )
                 }
-                className="w-full rounded-xl bg-slate-100 p-3 text-left transition hover:bg-slate-200"
+                className="
+                  w-full
+
+                  border
+                  border-border
+
+                  bg-card
+
+                  p-4
+
+                  text-left
+                  text-sm
+                  text-text-primary
+
+                  transition
+
+                  hover:border-primary/30
+                  hover:bg-primary
+                "
               >
                 What should I do after clicking a suspicious link?
               </button>

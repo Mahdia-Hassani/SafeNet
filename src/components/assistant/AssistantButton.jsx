@@ -9,26 +9,39 @@ function AssistantButton({ open, onClick }) {
         bottom-6
         right-6
         z-50
+
         flex
-        h-16
-        w-16
+        h-14
+        w-14
         items-center
         justify-center
+
         rounded-full
-        bg-blue-600
+
+        bg-primary
         text-white
-        shadow-[0_20px_60px_rgba(0,0,0,.18)]
+
+        border
+        border-primary/20
+
+        shadow-sm
+
         transition-all
         duration-300
-        hover:scale-110
+
+        hover:-translate-y-1
+        hover:shadow-md
+
         active:scale-95
       "
     >
       <Bot
-        size={28}
-        className={`transition-transform duration-300 ${
-          open ? "rotate-180" : "rotate-0"
-        }`}
+        size={26}
+        className={`
+          transition-transform
+          duration-300
+          ${open ? "rotate-180" : "rotate-0"}
+        `}
       />
     </button>
   );

@@ -6,7 +6,6 @@ import ScamAnalyzer from "../pages/ScamAnalyzer";
 import AnalysisReport from "../pages/AnalysisReport";
 import LearningCenter from "../pages/LearningCenter";
 import ThreatSimulation from "../pages/ThreatSimulation";
-import Settings from "../pages/Settings";
 import Profile from "../pages/Profile";
 import CourseDetails from "../pages/CourseDetails";
 
@@ -20,7 +19,6 @@ function AppRoutes() {
       <Route path="/learning" element={<LearningCenter />} />
       <Route path="/learning/:id" element={<CourseDetails />} />
       <Route path="/simulation" element={<ThreatSimulation />} />
-      <Route path="/settings" element={<Settings />} />
       <Route path="/profile" element={<Profile />} />
     </Routes>
   );

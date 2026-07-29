@@ -22,8 +22,17 @@ function MessageInput({ onSend }) {
   }
 
   return (
-    <div className="border-t border-slate-200 bg-white p-4">
-      <div className="flex items-end gap-2">
+    <div
+      className="
+        border-t
+        border-border
+
+        bg-card
+
+        p-5
+      "
+    >
+      <div className="flex items-end gap-3">
         <input
           type="text"
           value={message}
@@ -32,19 +41,26 @@ function MessageInput({ onSend }) {
           placeholder="Ask anything about cybersecurity..."
           className="
             flex-1
-            rounded-2xl
+
             border
-            border-slate-200
-            bg-slate-50
-            px-4
+            border-border
+
+            bg-surface
+
+            px-5
             py-3
+
+            text-sm
+            text-text-primary
+
             outline-none
-            transition-all
-            duration-200
-            focus:border-blue-500
-            focus:bg-white
-            focus:ring-2
-            focus:ring-blue-100
+
+            transition
+
+            placeholder:text-text-secondary
+
+            focus:border-primary
+            focus:bg-card
           "
         />
 
@@ -53,18 +69,19 @@ function MessageInput({ onSend }) {
             onClick={handleSend}
             className="
               flex
-              h-11
-              w-11
+              h-12
+              w-12
               items-center
               justify-center
-              rounded-full
-              bg-blue-600
+
+              bg-primary
+
               text-white
-              shadow-sm
-              transition-all
-              duration-200
-              hover:scale-105
-              hover:bg-blue-700
+
+              transition
+
+              hover:opacity-90
+
               active:scale-95
             "
           >

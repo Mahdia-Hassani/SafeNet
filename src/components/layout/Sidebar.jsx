@@ -165,26 +165,6 @@ function Sidebar({ mobileOpen, setMobileOpen }) {
 
           <span>Profile</span>
         </NavLink>
-
-        <NavLink
-          to="/settings"
-          onClick={() => setMobileOpen(false)}
-          className="
-            flex
-            items-center
-            gap-4
-            px-4
-            py-3
-            text-text-secondary
-            hover:bg-card
-            hover:text-text-primary
-            transition
-          "
-        >
-          <Settings size={20} />
-
-          <span>Settings</span>
-        </NavLink>
       </div>
     </aside>
   );
