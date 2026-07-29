@@ -11,6 +11,8 @@ const lessons = [
 
     duration: "45 min",
 
+    lessons: 5,
+
     category: "Email Security",
 
     image: "/images/phishing.jpg",
@@ -30,26 +32,35 @@ const lessons = [
 
     curriculum: [
       {
+        id: 1,
         title: "Introduction to Phishing",
         duration: "5 min",
         completed: false,
       },
+
       {
+        id: 2,
         title: "Common Phishing Techniques",
         duration: "10 min",
         completed: false,
       },
+
       {
+        id: 3,
         title: "Recognizing Fake Emails",
         duration: "12 min",
         completed: false,
       },
+
       {
+        id: 4,
         title: "Real-world Examples",
         duration: "8 min",
         completed: false,
       },
+
       {
+        id: 5,
         title: "Final Quiz",
         duration: "10 min",
         completed: false,
@@ -76,20 +87,36 @@ const lessons = [
       },
     ],
 
+    quiz: [
+      {
+        question: "Which of these is a common phishing sign?",
+
+        options: [
+          "Urgent request for password",
+          "Official company domain",
+          "Valid HTTPS certificate",
+          "Known sender",
+        ],
+
+        answer: "Urgent request for password",
+      },
+    ],
+
     certificate: true,
   },
-
   {
     id: 2,
 
     title: "Password Security",
 
     description:
-      "Learn how to build strong passwords and protect your online accounts.",
+      "Learn how to create strong passwords, use password managers and secure your online accounts against unauthorized access.",
 
     level: "Beginner",
 
     duration: "40 min",
+
+    lessons: 5,
 
     category: "Account Safety",
 
@@ -98,34 +125,49 @@ const lessons = [
     video: "https://www.youtube.com/embed/3NjQ9b3pgIg",
 
     content:
-      "Learn password best practices, password managers and multi-factor authentication.",
+      "Passwords remain one of the most important layers of online security. This course teaches you how to create strong passwords, avoid common mistakes, use password managers and enable multi-factor authentication.",
 
     learningObjectives: [
       "Create strong passwords",
+      "Understand password attacks",
       "Use password managers",
-      "Enable MFA",
-      "Protect accounts",
+      "Enable Multi-Factor Authentication",
+      "Protect online accounts",
     ],
 
     curriculum: [
       {
-        title: "Password Basics",
+        id: 1,
+        title: "Why Passwords Matter",
         duration: "6 min",
         completed: false,
       },
+
       {
-        title: "Strong Password Rules",
+        id: 2,
+        title: "Creating Strong Passwords",
         duration: "8 min",
         completed: false,
       },
+
       {
+        id: 3,
         title: "Password Managers",
-        duration: "12 min",
+        duration: "10 min",
         completed: false,
       },
+
       {
-        title: "Multi-Factor Authentication",
-        duration: "14 min",
+        id: 4,
+        title: "Multi-Factor Authentication (MFA)",
+        duration: "9 min",
+        completed: false,
+      },
+
+      {
+        id: 5,
+        title: "Course Quiz",
+        duration: "7 min",
         completed: false,
       },
     ],
@@ -144,26 +186,63 @@ const lessons = [
       },
 
       {
-        title: "Password Security Handbook",
+        title: "Password Security Checklist",
         type: "PDF",
         url: "/resources/password-guide.pdf",
       },
     ],
 
+    quiz: [
+      {
+        question: "Which password is considered the strongest?",
+
+        options: ["password123", "John1999", "Qw!7mP#2zL@9", "12345678"],
+
+        answer: "Qw!7mP#2zL@9",
+      },
+
+      {
+        question: "What is the main purpose of a password manager?",
+
+        options: [
+          "Increase internet speed",
+          "Store and generate secure passwords",
+          "Remove viruses",
+          "Block advertisements",
+        ],
+
+        answer: "Store and generate secure passwords",
+      },
+
+      {
+        question: "What does Multi-Factor Authentication (MFA) provide?",
+
+        options: [
+          "A second layer of security",
+          "Faster login",
+          "Password recovery",
+          "Internet encryption",
+        ],
+
+        answer: "A second layer of security",
+      },
+    ],
+
     certificate: true,
   },
-
   {
     id: 3,
 
     title: "Safe Browsing",
 
     description:
-      "Learn how to identify malicious websites, unsafe downloads and dangerous browser behavior.",
+      "Learn how to identify malicious websites, avoid dangerous downloads and browse the internet safely.",
 
     level: "Intermediate",
 
     duration: "55 min",
+
+    lessons: 6,
 
     category: "Web Safety",
 
@@ -172,40 +251,57 @@ const lessons = [
     video: "https://www.youtube.com/embed/yLJqD2Bk6vs",
 
     content:
-      "Learn how to safely browse the internet, identify fake websites, understand HTTPS, avoid malicious downloads and stay protected online.",
+      "Every day millions of users visit unsafe websites without realizing the risks. This course teaches you how to identify fake websites, understand HTTPS, avoid malicious downloads and protect yourself while browsing.",
 
     learningObjectives: [
-      "Recognize fake websites",
+      "Identify fake websites",
       "Understand HTTPS",
-      "Avoid malicious downloads",
-      "Check website legitimacy",
-      "Browse safely",
+      "Recognize unsafe downloads",
+      "Verify website legitimacy",
+      "Protect browser privacy",
+      "Browse safely on public Wi-Fi",
     ],
 
     curriculum: [
       {
-        title: "How Websites Work",
+        id: 1,
+        title: "Introduction to Safe Browsing",
+        duration: "7 min",
+        completed: false,
+      },
+
+      {
+        id: 2,
+        title: "Understanding HTTPS and Certificates",
+        duration: "9 min",
+        completed: false,
+      },
+
+      {
+        id: 3,
+        title: "Recognizing Fake Websites",
+        duration: "12 min",
+        completed: false,
+      },
+
+      {
+        id: 4,
+        title: "Safe Downloads",
+        duration: "10 min",
+        completed: false,
+      },
+
+      {
+        id: 5,
+        title: "Browsing on Public Wi-Fi",
         duration: "8 min",
         completed: false,
       },
+
       {
-        title: "HTTPS vs HTTP",
-        duration: "10 min",
-        completed: false,
-      },
-      {
-        title: "Recognizing Fake Websites",
-        duration: "14 min",
-        completed: false,
-      },
-      {
-        title: "Safe Downloads",
-        duration: "13 min",
-        completed: false,
-      },
-      {
-        title: "Final Quiz",
-        duration: "10 min",
+        id: 6,
+        title: "Course Quiz",
+        duration: "9 min",
         completed: false,
       },
     ],
@@ -224,7 +320,13 @@ const lessons = [
       },
 
       {
-        title: "Safe Browsing Guide",
+        title: "Mozilla HTTPS Guide",
+        type: "Article",
+        url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview",
+      },
+
+      {
+        title: "Safe Browsing Checklist",
         type: "PDF",
         url: "/resources/safe-browsing.pdf",
       },
@@ -232,28 +334,57 @@ const lessons = [
 
     quiz: [
       {
-        question: "Which protocol indicates an encrypted website connection?",
+        question:
+          "Which protocol indicates that communication with a website is encrypted?",
 
         options: ["HTTP", "HTTPS", "FTP", "SMTP"],
 
         answer: "HTTPS",
       },
+
+      {
+        question: "Which is a common sign of a fake website?",
+
+        options: [
+          "Misspelled domain name",
+          "HTTPS enabled",
+          "Official company logo",
+          "Valid contact information",
+        ],
+
+        answer: "Misspelled domain name",
+      },
+
+      {
+        question:
+          "Before downloading a file from the internet, what should you do first?",
+
+        options: [
+          "Verify the source website",
+          "Disable antivirus",
+          "Ignore browser warnings",
+          "Turn off Windows Defender",
+        ],
+
+        answer: "Verify the source website",
+      },
     ],
 
     certificate: true,
   },
-
   {
     id: 4,
 
     title: "Social Engineering",
 
     description:
-      "Understand how attackers manipulate people into revealing confidential information.",
+      "Understand how attackers manipulate human psychology to steal sensitive information without hacking systems directly.",
 
     level: "Advanced",
 
     duration: "60 min",
+
+    lessons: 6,
 
     category: "Human Risk",
 
@@ -262,59 +393,76 @@ const lessons = [
     video: "https://www.youtube.com/embed/Vo1urF6S4x8",
 
     content:
-      "Learn how cybercriminals exploit human psychology through phishing, impersonation, baiting and pretexting.",
+      "Social engineering attacks exploit human trust instead of technical vulnerabilities. Learn how attackers use impersonation, urgency, fear and deception to manipulate victims.",
 
     learningObjectives: [
       "Understand social engineering",
-      "Recognize manipulation",
-      "Protect personal information",
-      "Verify identities",
-      "Respond safely",
+      "Recognize manipulation techniques",
+      "Identify impersonation attacks",
+      "Verify identities safely",
+      "Protect confidential information",
+      "Respond correctly to suspicious requests",
     ],
 
     curriculum: [
       {
-        title: "Introduction",
+        id: 1,
+        title: "Introduction to Social Engineering",
         duration: "8 min",
         completed: false,
       },
+
       {
+        id: 2,
         title: "Psychology Behind Attacks",
-        duration: "12 min",
-        completed: false,
-      },
-      {
-        title: "Common Techniques",
-        duration: "18 min",
-        completed: false,
-      },
-      {
-        title: "Real World Cases",
-        duration: "12 min",
-        completed: false,
-      },
-      {
-        title: "Final Quiz",
         duration: "10 min",
+        completed: false,
+      },
+
+      {
+        id: 3,
+        title: "Common Social Engineering Techniques",
+        duration: "14 min",
+        completed: false,
+      },
+
+      {
+        id: 4,
+        title: "Real World Case Studies",
+        duration: "12 min",
+        completed: false,
+      },
+
+      {
+        id: 5,
+        title: "Defense Strategies",
+        duration: "8 min",
+        completed: false,
+      },
+
+      {
+        id: 6,
+        title: "Course Quiz",
+        duration: "8 min",
         completed: false,
       },
     ],
 
     resources: [
       {
-        title: "Social Engineering Framework",
-        type: "Article",
-        url: "https://www.social-engineer.org/",
-      },
-
-      {
-        title: "CISA Social Engineering",
+        title: "CISA Social Engineering Guide",
         type: "Article",
         url: "https://www.cisa.gov/",
       },
 
       {
-        title: "Human Hacking Guide",
+        title: "Social Engineer Organization",
+        type: "Article",
+        url: "https://www.social-engineer.org/",
+      },
+
+      {
+        title: "Human Hacking Checklist",
         type: "PDF",
         url: "/resources/social-engineering.pdf",
       },
@@ -322,11 +470,26 @@ const lessons = [
 
     quiz: [
       {
-        question: "Which attack relies mainly on manipulating people?",
+        question:
+          "Which attack focuses on manipulating people instead of computers?",
 
-        options: ["Malware", "Social Engineering", "Firewall", "Encryption"],
+        options: ["Social Engineering", "Firewall", "Encryption", "Backup"],
 
         answer: "Social Engineering",
+      },
+
+      {
+        question:
+          "What should you do if someone urgently requests confidential information?",
+
+        options: [
+          "Verify their identity first",
+          "Send the information immediately",
+          "Ignore company policy",
+          "Disable security software",
+        ],
+
+        answer: "Verify their identity first",
       },
     ],
 
@@ -338,11 +501,13 @@ const lessons = [
     title: "Malware Protection",
 
     description:
-      "Understand viruses, ransomware, spyware and how to protect your devices.",
+      "Learn how malware infects computers and how to defend your devices from viruses, ransomware and spyware.",
 
     level: "Intermediate",
 
     duration: "65 min",
+
+    lessons: 6,
 
     category: "Device Security",
 
@@ -351,40 +516,57 @@ const lessons = [
     video: "https://www.youtube.com/embed/NMYbkzjI5EY",
 
     content:
-      "Learn different malware types, infection methods and practical prevention strategies.",
+      "Understand different malware families, infection methods and practical strategies for protecting your computer and mobile devices.",
 
     learningObjectives: [
-      "Identify malware",
-      "Understand ransomware",
-      "Use antivirus software",
-      "Update devices",
+      "Understand malware types",
+      "Recognize ransomware attacks",
+      "Use antivirus effectively",
+      "Keep systems updated",
       "Protect personal files",
+      "Prevent future infections",
     ],
 
     curriculum: [
       {
-        title: "Malware Overview",
+        id: 1,
+        title: "Introduction to Malware",
         duration: "10 min",
         completed: false,
       },
+
       {
-        title: "Virus vs Worm",
+        id: 2,
+        title: "Virus vs Worm vs Trojan",
+        duration: "12 min",
+        completed: false,
+      },
+
+      {
+        id: 3,
+        title: "Ransomware Explained",
+        duration: "14 min",
+        completed: false,
+      },
+
+      {
+        id: 4,
+        title: "Antivirus Best Practices",
         duration: "10 min",
         completed: false,
       },
+
       {
-        title: "Ransomware",
-        duration: "15 min",
-        completed: false,
-      },
-      {
-        title: "Device Protection",
-        duration: "20 min",
-        completed: false,
-      },
-      {
-        title: "Quiz",
+        id: 5,
+        title: "Keeping Devices Secure",
         duration: "10 min",
+        completed: false,
+      },
+
+      {
+        id: 6,
+        title: "Course Quiz",
+        duration: "9 min",
         completed: false,
       },
     ],
@@ -403,23 +585,37 @@ const lessons = [
       },
 
       {
-        title: "Malware Protection Guide",
+        title: "Malware Protection Handbook",
         type: "PDF",
         url: "/resources/malware-guide.pdf",
       },
     ],
+
     quiz: [
       {
-        question: "What is ransomware designed to do?",
+        question: "What is ransomware primarily designed to do?",
 
         options: [
-          "Speed up computers",
           "Encrypt files for payment",
-          "Improve browsing",
-          "Block ads",
+          "Increase internet speed",
+          "Protect passwords",
+          "Update software",
         ],
 
         answer: "Encrypt files for payment",
+      },
+
+      {
+        question: "Which action helps prevent malware infections?",
+
+        options: [
+          "Keep software updated",
+          "Ignore security updates",
+          "Disable antivirus",
+          "Download cracked software",
+        ],
+
+        answer: "Keep software updated",
       },
     ],
 
@@ -431,11 +627,13 @@ const lessons = [
     title: "Online Privacy",
 
     description:
-      "Protect your digital identity and personal information while using the internet.",
+      "Learn how to protect your personal information and maintain privacy while using websites, apps and online services.",
 
     level: "Beginner",
 
-    duration: "45 min",
+    duration: "50 min",
+
+    lessons: 6,
 
     category: "Privacy",
 
@@ -444,35 +642,57 @@ const lessons = [
     video: "https://www.youtube.com/embed/wVyu7NB7W6Y",
 
     content:
-      "Learn how websites collect data, how tracking works and how to improve your online privacy.",
+      "Discover how websites collect personal information, how online tracking works and how to improve your digital privacy with practical techniques.",
 
     learningObjectives: [
-      "Protect personal information",
-      "Understand tracking",
-      "Manage browser privacy",
-      "Use VPNs safely",
-      "Control permissions",
+      "Understand digital privacy",
+      "Control personal information",
+      "Manage browser privacy settings",
+      "Recognize online tracking",
+      "Use VPNs correctly",
+      "Protect your digital identity",
     ],
 
     curriculum: [
       {
-        title: "Digital Footprint",
+        id: 1,
+        title: "Digital Footprints",
         duration: "8 min",
         completed: false,
       },
+
       {
-        title: "Cookies & Tracking",
+        id: 2,
+        title: "Cookies and Online Tracking",
         duration: "10 min",
         completed: false,
       },
+
       {
+        id: 3,
         title: "Privacy Settings",
-        duration: "12 min",
+        duration: "10 min",
         completed: false,
       },
+
       {
+        id: 4,
         title: "Protecting Personal Data",
-        duration: "15 min",
+        duration: "10 min",
+        completed: false,
+      },
+
+      {
+        id: 5,
+        title: "VPN and Secure Connections",
+        duration: "7 min",
+        completed: false,
+      },
+
+      {
+        id: 6,
+        title: "Course Quiz",
+        duration: "5 min",
         completed: false,
       },
     ],
@@ -499,11 +719,20 @@ const lessons = [
 
     quiz: [
       {
-        question: "Which tool helps encrypt internet traffic?",
+        question: "Which tool encrypts your internet traffic on public Wi-Fi?",
 
-        options: ["VPN", "PDF", "ZIP", "USB"],
+        options: ["VPN", "USB Drive", "ZIP File", "PDF"],
 
         answer: "VPN",
+      },
+
+      {
+        question:
+          "Which technology is commonly used to track users across websites?",
+
+        options: ["Cookies", "Keyboard", "Monitor", "Bluetooth"],
+
+        answer: "Cookies",
       },
     ],
 

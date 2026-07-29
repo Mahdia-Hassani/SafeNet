@@ -5,21 +5,22 @@ function CourseHero({ lesson }) {
     <section
       className="
         grid
-        gap-8
-        lg:grid-cols-2
         items-center
+        gap-10
+        lg:grid-cols-2
       "
     >
-      {/* Image */}
+      {/* Course Image */}
 
       <div
         className="
-          h-[280px]
-          sm:h-[360px]
-          lg:h-[420px]
+          h-[240px]
+          sm:h-[320px]
+          lg:h-[380px]
+          w-full
           overflow-hidden
           bg-surface
-          shadow-[0_8px_25px_rgba(0,0,0,0.08)]
+          shadow-[0_8px_20px_rgba(0,0,0,0.12)]
         "
       >
         {lesson.image ? (
@@ -30,6 +31,7 @@ function CourseHero({ lesson }) {
               h-full
               w-full
               object-cover
+              object-center
             "
           />
         ) : (
@@ -49,12 +51,18 @@ function CourseHero({ lesson }) {
 
       {/* Content */}
 
-      <div>
+      <div
+        className="
+          max-w-xl
+        "
+      >
         <h1
           className="
             text-3xl
             sm:text-4xl
+            lg:text-5xl
             font-bold
+            leading-tight
             text-text-primary
           "
         >
@@ -64,6 +72,7 @@ function CourseHero({ lesson }) {
         <p
           className="
             mt-5
+            text-base
             leading-7
             text-text-secondary
           "
@@ -71,37 +80,41 @@ function CourseHero({ lesson }) {
           {lesson.description}
         </p>
 
-        {/* Info */}
+        {/* Course Info */}
 
         <div
           className="
             mt-6
             flex
             flex-wrap
-            gap-6
+            gap-8
             text-sm
             text-text-secondary
           "
         >
           <div className="flex items-center gap-2">
-            <Clock3 size={18} />
-            {lesson.duration || "2 Hours"}
+            <Clock3 size={18} className="text-primary" />
+
+            <span>{lesson.duration || "2 Hours"}</span>
           </div>
 
           <div className="flex items-center gap-2">
-            <BookOpen size={18} />
-            {lesson.lessons || 5} Lessons
+            <BookOpen size={18} className="text-primary" />
+
+            <span>{lesson.lessons || 5} Lessons</span>
           </div>
         </div>
+
+        {/* Button */}
 
         <button
           className="
             mt-8
             flex
             items-center
-            gap-2
+            gap-3
             bg-primary
-            px-8
+            px-7
             py-3
             text-white
             shadow-sm

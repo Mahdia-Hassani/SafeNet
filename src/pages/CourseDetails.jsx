@@ -7,7 +7,7 @@ import CourseHero from "../components/course/CourseHero";
 import CourseTabs from "../components/course/CourseTabs";
 import Curriculum from "../components/course/Curriculum";
 import Resources from "../components/course/Resources";
-import Quiz from "../components/course/Quiz";
+import Notes from "../components/course/Notes";
 
 import lessons from "../data/lesson";
 
@@ -92,7 +92,7 @@ function CourseDetails() {
 
             {activeTab === "resources" && <Resources lesson={lesson} />}
 
-            {activeTab === "quiz" && <Quiz lesson={lesson} />}
+            {activeTab === "notes" && <Notes lesson={lesson} />}
           </div>
         </div>
       </main>
