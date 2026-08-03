@@ -1,100 +1,158 @@
 import DashboardLayout from "../layouts/DashboardLayout";
 
-import StatCard from "../components/dashboard/StatCard";
-import SecurityTip from "../components/dashboard/SecurityTip";
-import RecentAnalyses from "../components/dashboard/RecentAnalyses";
+import DashboardHeader from "../components/dashboard/DashboardHeader";
+import SafetyScore from "../components/dashboard/SafetyScore";
+import SecurityOverview from "../components/dashboard/SecurityOverview";
 import LearningProgress from "../components/dashboard/LearningProgress";
+import SimulationProgress from "../components/dashboard/SimulationProgress";
+import RecentAnalyses from "../components/dashboard/RecentAnalyess";
+import LatestNotes from "../components/dashboard/LatestNotes";
+import SecurityTip from "../components/dashboard/SecurityTip";
 import Achievements from "../components/dashboard/Achievements";
 
-import { ShieldCheck, BookOpen, Target, ShieldAlert } from "lucide-react";
+import lessons from "../data/lesson";
+import securityTips from "../data/securityTips";
+import achievementsData from "../data/achievements";
 
 import useAnalyses from "../hooks/useAnalyses";
-
-import lessons from "../data/lesson";
 
 import {
   getCompletedLessonsCount,
   getLearningProgress,
 } from "../utils/learningStorage";
 
-import { getCompletedQuizzesCount } from "../utils/quizStorage";
+import { getLatestNote, getNotes } from "../utils/noteStorage";
+
+import {
+  getSimulationResults,
+  getSimulationProgress,
+} from "../utils/simulationStorage";
 
 function Dashboard() {
   const analyses = useAnalyses();
 
   const completedLessons = getCompletedLessonsCount();
 
-  const completedQuizzes = getCompletedQuizzesCount();
-
   const learningProgress = getLearningProgress(lessons.length);
 
-  const dashboardStats = [
-    {
-      id: 1,
-      title: "Safety Score",
-      value: `${learningProgress}%`,
-      icon: ShieldCheck,
-    },
-    {
-      id: 2,
-      title: "Completed Lessons",
-      value: completedLessons,
-      icon: BookOpen,
-    },
-    {
-      id: 3,
-      title: "Completed Quizzes",
-      value: completedQuizzes,
-      icon: Target,
-    },
-    {
-      id: 4,
-      title: "Threat Analyses",
-      value: analyses.length,
-      icon: ShieldAlert,
-    },
-  ];
+  const simulationResults = getSimulationResults();
+
+  const simulationProgress = getSimulationProgress() || {
+    completedScenarios: 0,
+    totalScenarios: 0,
+    progress: 0,
+  };
+
+  const latestSimulation = simulationResults.length
+    ? simulationResults[0]
+    : null;
+
+  const notes = getNotes();
+
+  const latestNote = getLatestNote();
 
   return (
     <DashboardLayout>
-      <div className="space-y-6">
+      <div
+        className="
+          w-full
+          max-w-[1600px]
+          mx-auto
+          space-y-8
+          overflow-x-hidden
+        "
+      >
         {/* Header */}
 
-        <div>
-          <h1 className="text-3xl font-bold">Welcome Back </h1>
+        <DashboardHeader userName="Ali" lastLogin="Today" />
 
-          <p className="mt-2 text-slate-500">
-            Continue improving your cybersecurity awareness.
-          </p>
-        </div>
+        {/* Security Summary */}
 
-        {/* Stats */}
-
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {dashboardStats.map((stat) => (
-            <StatCard
-              key={stat.id}
-              title={stat.title}
-              value={stat.value}
-              icon={stat.icon}
+        <div
+          className="
+            grid
+            grid-cols-1
+            xl:grid-cols-12
+            gap-6
+          "
+        >
+          <div
+            className="
+              xl:col-span-4
+            "
+          >
+            <SafetyScore
+              score={learningProgress}
+              completedLessons={completedLessons}
+              completedSimulations={simulationResults.length}
+              threatAnalyses={analyses.length}
             />
-          ))}
+          </div>
+
+          <div
+            className="
+              xl:col-span-8
+              min-w-0
+            "
+          >
+            <SecurityOverview
+              lessons={completedLessons}
+              simulations={simulationResults.length}
+              analyses={analyses.length}
+              achievements={
+                achievementsData.filter((item) => item.unlocked).length
+              }
+            />
+          </div>
         </div>
 
-        {/* Learning Progress */}
+        {/* Security Tip */}
 
-        <LearningProgress />
+        <SecurityTip tip={securityTips[0]} />
+
+        {/* Progress */}
+
+        <div
+          className="
+            grid
+            grid-cols-1
+            lg:grid-cols-2
+            gap-6
+          "
+        >
+          <LearningProgress
+            completedLessons={completedLessons}
+            totalLessons={lessons.length}
+            percentage={learningProgress}
+          />
+
+          <SimulationProgress
+            completed={simulationProgress.completedScenarios}
+            totalScenarios={simulationProgress.totalScenarios}
+            score={latestSimulation?.score || 0}
+            percentage={simulationProgress.progress}
+          />
+        </div>
+
+        {/* Recent Activity */}
+
+        <div
+          className="
+            grid
+            grid-cols-1
+            lg:grid-cols-2
+            gap-6
+            min-w-0
+          "
+        >
+          <RecentAnalyses analyses={analyses} />
+
+          <LatestNotes notes={notes} latestNote={latestNote} />
+        </div>
 
         {/* Achievements */}
 
-        <Achievements />
-
-        {/* Content */}
-
-        <div className="grid gap-6 lg:grid-cols-2">
-          <RecentAnalyses />
-          <SecurityTip />
-        </div>
+        <Achievements achievements={achievementsData} />
       </div>
     </DashboardLayout>
   );

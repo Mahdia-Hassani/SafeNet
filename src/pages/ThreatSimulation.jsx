@@ -1,121 +1,109 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import DashboardLayout from "../layouts/DashboardLayout";
 
-import quizzes from "../data/quizzes";
-import { saveQuizResult } from "../utils/quizStorage";
-import QuizQuestion from "../components/quiz/QuizQuestion";
+import SimulationHeader from "../components/simulation/SimulationHeader";
+import SimulationProgress from "../components/simulation/SimulationProgress";
+import ScoreCard from "../components/simulation/ScoreCard";
 
 function ThreatSimulation() {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const navigate = useNavigate();
 
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const progress =
+    JSON.parse(localStorage.getItem("simulation_progress")) || {};
 
-  const [score, setScore] = useState(0);
+  const currentQuestion = progress.currentQuestion || 0;
 
-  const [quizFinished, setQuizFinished] = useState(false);
+  const totalQuestions = 5;
 
-  const question = quizzes[currentQuestion];
+  const completed = currentQuestion >= totalQuestions;
 
-  function handleNext() {
-    if (selectedAnswer === null) {
-      alert("Please select an answer.");
-      return;
-    }
-
-    const isCorrect = selectedAnswer === question.correctAnswer;
-
-    const newScore = isCorrect ? score + 1 : score;
-
-    if (currentQuestion === quizzes.length - 1) {
-      saveQuizResult({
-        id: Date.now(),
-        score: newScore,
-        total: quizzes.length,
-        completedAt: new Date().toISOString(),
-      });
-
-      setScore(newScore);
-
-      setQuizFinished(true);
-
-      return;
-    }
-
-    if (isCorrect) {
-      setScore(newScore);
-    }
-
-    setCurrentQuestion((prev) => prev + 1);
-
-    setSelectedAnswer(null);
-  }
-
-  if (quizFinished) {
-    const percentage = Math.round((score / quizzes.length) * 100);
-
-    return (
-      <DashboardLayout>
-        <div className="mx-auto max-w-2xl text-center">
-          <h1 className="text-3xl font-bold">Quiz Completed 🎉</h1>
-
-          <p className="mt-6 text-xl">
-            Score: {score} / {quizzes.length}
-          </p>
-
-          <p className="mt-2 text-slate-500">{percentage}% Correct Answers</p>
-        </div>
-      </DashboardLayout>
-    );
-  }
+  const score = JSON.parse(localStorage.getItem("simulation_score")) || 0;
 
   return (
     <DashboardLayout>
-      <div className="mx-auto max-w-3xl">
-        {/* Header */}
+      <div
+        className="
+          mx-auto
+          max-w-6xl
+          space-y-8
+        "
+      >
+        <SimulationHeader />
 
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold">Threat Simulation</h1>
+        <SimulationProgress current={currentQuestion} total={totalQuestions} />
 
-          <p className="mt-2 text-slate-500">
-            Test your cybersecurity awareness.
-          </p>
-        </div>
+        <ScoreCard score={score} correct={score} total={totalQuestions} />
 
-        {/* Progress */}
-
-        <p className="mb-4 text-sm text-slate-500">
-          Question {currentQuestion + 1} of {quizzes.length}
-        </p>
-
-        {/* Question */}
-
-        <QuizQuestion
-          question={question}
-          selectedAnswer={selectedAnswer}
-          onSelectAnswer={setSelectedAnswer}
-        />
-
-        {/* Button */}
-
-        <div className="mt-6 flex justify-end">
-          <button
-            onClick={handleNext}
+        <section
+          className="
+            border
+            border-border
+            bg-card
+            shadow-sm
+          "
+        >
+          <div
             className="
-              rounded-xl
-              bg-blue-600
+              border-b
+              border-border
               px-6
-              py-3
-              text-white
-              transition
-              hover:bg-blue-700
+              py-5
             "
           >
-            {currentQuestion === quizzes.length - 1
-              ? "Finish Quiz"
-              : "Next Question"}
-          </button>
-        </div>
+            <h2
+              className="
+                text-xl
+                font-semibold
+                text-text-primary
+              "
+            >
+              Ready to Start?
+            </h2>
+
+            <p
+              className="
+                mt-2
+                text-text-secondary
+              "
+            >
+              Complete realistic cybersecurity scenarios and improve your
+              decision-making skills.
+            </p>
+          </div>
+
+          <div
+            className="
+              flex
+              items-center
+              justify-between
+              px-6
+              py-6
+            "
+          >
+            <div>
+              <p className="font-medium text-text-primary">Estimated Time</p>
+
+              <p className="mt-1 text-sm text-text-secondary">
+                Approximately 10–15 minutes
+              </p>
+            </div>
+
+            <button
+              onClick={() => navigate("/simulation-session")}
+              className="
+                bg-primary
+                px-6
+                py-3
+                text-white
+                transition
+                hover:opacity-90
+              "
+            >
+              {completed ? "Continue Simulation" : "Start Simulation"}
+            </button>
+          </div>
+        </section>
       </div>
     </DashboardLayout>
   );

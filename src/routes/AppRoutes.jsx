@@ -6,6 +6,8 @@ import ScamAnalyzer from "../pages/ScamAnalyzer";
 import AnalysisReport from "../pages/AnalysisReport";
 import LearningCenter from "../pages/LearningCenter";
 import ThreatSimulation from "../pages/ThreatSimulation";
+import SimulationSession from "../pages/SimulationSession";
+import SimulationReport from "../pages/SimulationReport";
 import Profile from "../pages/Profile";
 import CourseDetails from "../pages/CourseDetails";
 
@@ -19,6 +21,8 @@ function AppRoutes() {
       <Route path="/learning" element={<LearningCenter />} />
       <Route path="/learning/:id" element={<CourseDetails />} />
       <Route path="/simulation" element={<ThreatSimulation />} />
+      <Route path="/simulation/session" element={<SimulationSession />} />
+      <Route path="/simulation/report" element={<SimulationReport />} />
       <Route path="/profile" element={<Profile />} />
     </Routes>
   );

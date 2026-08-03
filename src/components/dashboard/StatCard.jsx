@@ -1,28 +1,70 @@
-import Card from "../ui/Card";
+import { ArrowUpRight } from "lucide-react";
 
-function StatCard({ title, value, icon: Icon }) {
+function StatCard({ title, value, icon: Icon, color = "text-primary" }) {
   return (
-    <Card>
-      <div className="flex items-center justify-between">
+    <div
+      className="
+        border
+        border-border
+        bg-card
+        p-6
+        transition
+        hover:shadow-sm
+      "
+    >
+      <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm text-text-secondary">{title}</p>
+          <p
+            className="
+              text-sm
+              text-text-secondary
+            "
+          >
+            {title}
+          </p>
 
-          <h3 className="mt-2 text-3xl font-bold text-text-primary">{value}</h3>
+          <h3
+            className="
+              mt-3
+              text-3xl
+              font-bold
+              text-text-primary
+            "
+          >
+            {value}
+          </h3>
         </div>
 
         <div
-          className="
-            rounded-md
-            border
-            border-border
-            bg-surface
-            p-3
-          "
+          className={`
+            flex
+            h-12
+            w-12
+            items-center
+            justify-center
+            bg-primary/10
+            ${color}
+          `}
         >
-          <Icon size={22} className="text-primary" />
+          <Icon size={24} />
         </div>
       </div>
-    </Card>
+
+      <div
+        className="
+          mt-6
+          flex
+          items-center
+          gap-2
+          text-sm
+          text-text-secondary
+        "
+      >
+        <ArrowUpRight size={16} />
+
+        <span>Updated recently</span>
+      </div>
+    </div>
   );
 }
 

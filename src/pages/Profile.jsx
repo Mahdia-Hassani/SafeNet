@@ -8,7 +8,6 @@ import {
   getCompletedLessonsCount,
   getLearningProgress,
 } from "../utils/learningStorage";
-import { getCompletedQuizzesCount } from "../utils/quizStorage";
 import { calculateSafetyScore } from "../utils/calculateSafetyScore";
 import { getAchievements } from "../utils/achievementUtils";
 

@@ -26,8 +26,8 @@ function AnalysisResult({ analysis }) {
             icon: <AlertTriangle size={36} />,
           }
         : {
-            bg: "bg-green-50",
-            border: "border-green-200",
+            bg: "bg-surface",
+            border: "border-border",
             text: "text-green-600",
             icon: <ShieldCheck size={36} />,
           };
@@ -38,13 +38,13 @@ function AnalysisResult({ analysis }) {
 
       <section
         className={`
-border
-${riskStyle.border}
-${riskStyle.bg}
-p-6
-`}
+          border
+          ${riskStyle.border}
+          ${riskStyle.bg}
+          p-6
+          `}
       >
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 bg-surface border border-border">
           <div className={riskStyle.text}>{riskStyle.icon}</div>
 
           <div>
@@ -54,20 +54,20 @@ p-6
 
             <h1
               className="
-text-2xl
-font-bold
-text-text-primary
-"
+                text-2xl
+                font-bold
+                text-text-primary
+                "
             >
               {analysis.riskLevel} Risk Detected
             </h1>
 
             <p
               className="
-mt-1
-text-sm
-text-text-secondary
-"
+              mt-1
+              text-sm
+              text-text-secondary
+              "
             >
               {analysis.indicators?.length || 0}
               security indicators found
@@ -78,30 +78,30 @@ text-text-secondary
 
       <div
         className="
-grid
-gap-6
-lg:grid-cols-3
-"
+          grid
+          gap-6
+          lg:grid-cols-3
+          "
       >
         {/* Main Report */}
 
         <div
           className="
-space-y-6
-lg:col-span-2
-"
+          space-y-6
+          lg:col-span-2
+          "
         >
           <ReportCard title="Detected Content">
             <div
               className="
-bg-surface
-border
-border-border
-p-4
-text-sm
-leading-6
-text-text-secondary
-"
+              bg-surface
+              border
+              border-border
+              p-4
+              text-sm
+              leading-6
+              text-text-secondary
+              "
             >
               {analysis.content}
             </div>
@@ -113,15 +113,15 @@ text-text-secondary
                 <div
                   key={index}
                   className="
-flex
-items-center
-gap-3
-border
-border-border
-px-4
-py-3
-text-sm
-"
+                  flex
+                  items-center
+                  gap-3
+                  border
+                  border-border
+                  px-4
+                  py-3
+                  text-sm
+                  "
                 >
                   <AlertTriangle size={17} className="text-amber-500" />
 
@@ -134,10 +134,10 @@ text-sm
           <ReportCard title="Threat Explanation">
             <p
               className="
-text-sm
-leading-7
-text-text-secondary
-"
+              text-sm
+              leading-7
+              text-text-secondary
+              "
             >
               {analysis.explanation}
             </p>
@@ -146,47 +146,44 @@ text-text-secondary
 
         {/* Sidebar */}
 
-        <div
-          className="
-space-y-6
-"
-        >
+        <div className="space-y-6">
           <div
             className="
-border
-border-border
-bg-card
-p-5
-"
+              border
+              border-border
+              bg-card
+              p-5
+              "
           >
             <h3
               className="
-font-semibold
-text-text-primary
-"
+              font-semibold
+              text-text-primary
+              "
             >
               Recommendation
             </h3>
 
             <div
               className="
-mt-4
-flex
-gap-3
-bg-green-50
-border
-border-green-200
-p-4
-"
+                mt-4
+                flex
+                gap-3
+                bg-surface
+                border
+                border-border
+                p-4
+                "
             >
               <CheckCircle2 size={20} className="text-green-600" />
 
               <p
                 className="
-text-sm
-leading-6
-text-text-secondary
-"
+                bg-surface
+                text-sm
+                leading-6
+                text-text-secondary
+                "
               >
                 {analysis.recommendation}
               </p>
