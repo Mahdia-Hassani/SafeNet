@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Clock, ShieldAlert, Play } from "lucide-react";
 
 import DashboardLayout from "../layouts/DashboardLayout";
 
@@ -9,31 +10,44 @@ import ScoreCard from "../components/simulation/ScoreCard";
 function ThreatSimulation() {
   const navigate = useNavigate();
 
-  const progress =
-    JSON.parse(localStorage.getItem("simulation_progress")) || {};
+  const progress = JSON.parse(localStorage.getItem("simulation_progress")) || {
+    currentQuestion: 0,
+  };
 
-  const currentQuestion = progress.currentQuestion || 0;
+  const score = JSON.parse(localStorage.getItem("simulation_score")) || 0;
 
   const totalQuestions = 5;
 
-  const completed = currentQuestion >= totalQuestions;
+  const currentQuestion = progress.currentQuestion || 0;
 
-  const score = JSON.parse(localStorage.getItem("simulation_score")) || 0;
+  const percentage = Math.round((currentQuestion / totalQuestions) * 100);
 
   return (
     <DashboardLayout>
       <div
         className="
-          mx-auto
+          w-full
           max-w-6xl
           space-y-8
         "
       >
         <SimulationHeader />
 
-        <SimulationProgress current={currentQuestion} total={totalQuestions} />
+        <div
+          className="
+            grid
+            gap-6
+            lg:grid-cols-2
+          "
+        >
+          <SimulationProgress
+            current={currentQuestion}
+            total={totalQuestions}
+            percentage={percentage}
+          />
 
-        <ScoreCard score={score} correct={score} total={totalQuestions} />
+          <ScoreCard score={score} correct={score} total={totalQuestions} />
+        </div>
 
         <section
           className="
@@ -48,59 +62,115 @@ function ThreatSimulation() {
               border-b
               border-border
               px-6
-              py-5
+              py-6
             "
           >
-            <h2
+            <div
               className="
-                text-xl
-                font-semibold
-                text-text-primary
+                flex
+                items-center
+                gap-3
               "
             >
-              Ready to Start?
-            </h2>
+              <div
+                className="
+                  flex
+                  h-12
+                  w-12
+                  items-center
+                  justify-center
+                  bg-primary/10
+                  text-primary
+                "
+              >
+                <ShieldAlert size={24} />
+              </div>
 
-            <p
-              className="
-                mt-2
-                text-text-secondary
-              "
-            >
-              Complete realistic cybersecurity scenarios and improve your
-              decision-making skills.
-            </p>
+              <div>
+                <h2
+                  className="
+                    text-xl
+                    font-semibold
+                    text-text-primary
+                  "
+                >
+                  Threat Simulation
+                </h2>
+
+                <p
+                  className="
+                    mt-1
+                    text-sm
+                    text-text-secondary
+                  "
+                >
+                  Test your cybersecurity awareness with realistic attack
+                  scenarios.
+                </p>
+              </div>
+            </div>
           </div>
 
           <div
             className="
               flex
-              items-center
-              justify-between
+              flex-col
+              gap-6
               px-6
               py-6
+              md:flex-row
+              md:items-center
+              md:justify-between
             "
           >
-            <div>
-              <p className="font-medium text-text-primary">Estimated Time</p>
+            <div
+              className="
+                flex
+                items-center
+                gap-4
+              "
+            >
+              <Clock className="text-primary" size={24} />
 
-              <p className="mt-1 text-sm text-text-secondary">
-                Approximately 10–15 minutes
-              </p>
+              <div>
+                <p
+                  className="
+                    font-medium
+                    text-text-primary
+                  "
+                >
+                  Estimated Time
+                </p>
+
+                <p
+                  className="
+                    text-sm
+                    text-text-secondary
+                  "
+                >
+                  Around 10-15 minutes
+                </p>
+              </div>
             </div>
 
             <button
-              onClick={() => navigate("/simulation-session")}
+              onClick={() => navigate("/simulation/session")}
               className="
+                flex
+                items-center
+                justify-center
+                gap-2
                 bg-primary
                 px-6
                 py-3
+                font-medium
                 text-white
                 transition
                 hover:opacity-90
               "
             >
-              {completed ? "Continue Simulation" : "Start Simulation"}
+              <Play size={18} />
+              Start Simulation
             </button>
           </div>
         </section>

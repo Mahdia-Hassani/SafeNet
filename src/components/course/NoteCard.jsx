@@ -68,7 +68,7 @@ function NoteCard({ note, onEdit, onDelete, onCopy }) {
           <button
             onClick={() => onCopy(note)}
             className="
-              rounded-lg
+              rounded-none
               p-2
               transition
               hover:bg-surface

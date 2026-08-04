@@ -14,7 +14,7 @@ function TypingIndicator() {
           items-center
           justify-center
 
-          rounded-xl
+          rounded-full
 
           bg-primary
           text-white

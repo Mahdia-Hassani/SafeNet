@@ -1,4 +1,6 @@
 import { Bell, Sun, Moon, Menu } from "lucide-react";
+import { Link } from "react-router-dom";
+
 import useTheme from "../../hooks/useTheme";
 
 function Topbar({ onMenuClick }) {
@@ -7,6 +9,9 @@ function Topbar({ onMenuClick }) {
   return (
     <header
       className="
+        sticky
+        top-0
+        z-30
         h-20
         flex
         items-center
@@ -37,19 +42,6 @@ function Topbar({ onMenuClick }) {
       >
         <Menu size={22} />
       </button>
-
-      {/* Mobile Logo */}
-
-      <div
-        className="
-          lg:hidden
-          text-xl
-          font-bold
-          text-primary
-        "
-      >
-        SafeNet
-      </div>
 
       {/* Right Side */}
 
@@ -102,16 +94,21 @@ function Topbar({ onMenuClick }) {
 
         {/* Avatar */}
 
-        <img
-          src="/images/Avatar.jpg"
-          alt="User Avatar"
-          className="
-            h-10
-            w-10
-            rounded-full
-            object-cover
-          "
-        />
+        <Link to="/profile">
+          <img
+            src="/images/Avatar.jpg"
+            alt="User Avatar"
+            className="
+              h-10
+              w-10
+              rounded-full
+              object-cover
+              cursor-pointer
+              transition
+              hover:scale-105
+            "
+          />
+        </Link>
       </div>
     </header>
   );

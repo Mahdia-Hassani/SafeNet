@@ -34,7 +34,7 @@ function AssistantWindow({ open, onClose, messages, loading, sendMessage }) {
 
         overflow-hidden
 
-        rounded-2xl
+        rounded-none
 
         border
         border-border

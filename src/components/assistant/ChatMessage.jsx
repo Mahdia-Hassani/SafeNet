@@ -24,7 +24,7 @@ function ChatMessage({ sender, message }) {
             items-center
             justify-center
 
-            rounded-xl
+            rounded-none
 
             bg-primary
             text-white
@@ -76,7 +76,7 @@ function ChatMessage({ sender, message }) {
             items-center
             justify-center
 
-            rounded-xl
+            rounded-none
 
             border
             border-border

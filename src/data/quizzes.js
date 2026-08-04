@@ -9,15 +9,15 @@ const quizzes = [
     difficulty: "Beginner",
 
     scenario: `
-You receive an email claiming that your bank account will be suspended within the next 24 hours.
+      You receive an email claiming that your bank account will be suspended within the next 24 hours.
 
-The email asks you to click a link immediately to verify your identity.
+      The email asks you to click a link immediately to verify your identity.
 
-Sender:
-support@secure-bank-login.com
+      Sender:
+      support@secure-bank-login.com
 
-The email creates a strong sense of urgency and requests immediate action.
-`,
+      The email creates a strong sense of urgency and requests immediate action.
+      `,
 
     question: "What should you do first?",
 
@@ -109,10 +109,10 @@ You notice something unusual in the address.
     difficulty: "Intermediate",
 
     scenario: `
-Someone calls claiming to be from your company's IT department.
+    Someone calls claiming to be from your company's IT department.
 
-They say your account has been compromised and urgently ask you to provide the one-time verification code you just received.
-`,
+    They say your account has been compromised and urgently ask you to provide the one-time verification code you just received.
+    `,
 
     question: "What is the safest response?",
 
