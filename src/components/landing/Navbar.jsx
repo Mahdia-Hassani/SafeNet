@@ -48,7 +48,7 @@ function Navbar() {
             w-11
             h-11
 
-            rounded-xl
+            rounded-lg
 
             bg-primary/10
 
@@ -181,7 +181,7 @@ function Navbar() {
             px-6
             py-2.5
 
-            rounded-xl
+            rounded-lg
 
             bg-primary
 
@@ -297,7 +297,7 @@ function Navbar() {
 
               py-3
 
-              rounded-xl
+              rounded-lg
 
               bg-primary
 

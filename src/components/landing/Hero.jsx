@@ -82,7 +82,7 @@ function Hero() {
                 px-8
                 py-3.5
 
-                rounded-xl
+                rounded-lg
 
                 bg-primary
 
@@ -106,7 +106,7 @@ function Hero() {
                 px-8
                 py-3.5
 
-                rounded-xl
+                rounded-lg
 
                 border
                 border-border
