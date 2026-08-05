@@ -49,9 +49,7 @@ function Profile() {
       >
         {/* Page Header */}
 
-        <ProfileHeader />
-
-        {/* Tabs */}
+        <ProfileHeader onEditProfile={() => setActiveTab("profile")} />
 
         <ProfileTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 

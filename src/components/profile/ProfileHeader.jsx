@@ -1,18 +1,19 @@
 import { Edit3, ShieldCheck } from "lucide-react";
+import { useProfile } from "../../context/ProfileContext";
 
-function ProfileHeader() {
+function ProfileHeader({ onEditProfile }) {
+  const { profile } = useProfile();
+
+  if (!profile) return null;
+
   return (
     <section
       className="
         w-full
-        rounded-none
         border
         border-border
         bg-card
-        p-5
-        sm:p-7
-        transition
-        duration-300
+        p-6
       "
     >
       <div
@@ -20,20 +21,14 @@ function ProfileHeader() {
           flex
           flex-col
           gap-6
-          sm:flex-row
-          sm:items-center
-          sm:justify-between
+          md:flex-row
+          md:items-center
+          md:justify-between
         "
       >
-        {/* User Info */}
+        {/* Left Side */}
 
-        <div
-          className="
-            flex
-            items-center
-            gap-4
-          "
-        >
+        <div className="flex items-center gap-5">
           {/* Avatar */}
 
           <img
@@ -43,45 +38,42 @@ function ProfileHeader() {
               h-20
               w-20
               rounded-full
-              object-cover
               border
               border-border
+              object-cover
             "
           />
 
-          {/* Information */}
+          {/* User Information */}
 
-          <div
-            className="
-              space-y-1
-            "
-          >
+          <div>
             <h1
               className="
-                text-xl
+                text-2xl
                 font-semibold
                 text-text-primary
               "
             >
-              Basira
+              {profile.fullName}
             </h1>
 
             <p
               className="
-                text-sm
+                mt-1
                 text-text-secondary
               "
             >
-              Cyber Security Learner
+              {profile.role}
             </p>
 
             <div
               className="
+                mt-3
                 flex
                 items-center
                 gap-2
                 text-sm
-                text-text-secondary
+                text-primary
               "
             >
               <ShieldCheck size={16} />
@@ -91,28 +83,30 @@ function ProfileHeader() {
           </div>
         </div>
 
-        {/* Action */}
+        {/* Right Side */}
 
-        <button
-          className="
-            flex
-            items-center
-            justify-center
-            gap-2
-            rounded-lg
-            bg-primary
-            px-5
-            py-2.5
-            text-sm
-            font-medium
-            text-white
-            transition
-            hover:opacity-90
-          "
-        >
-          <Edit3 size={17} />
-          Edit Profile
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={onEditProfile}
+            className="
+              flex
+              items-center
+              gap-2
+              border
+              border-primary
+              bg-primary
+              px-5
+              py-2.5
+              font-medium
+              text-white
+              transition
+              hover:opacity-90
+            "
+          >
+            <Edit3 size={18} />
+            Edit Profile
+          </button>
+        </div>
       </div>
     </section>
   );

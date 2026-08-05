@@ -4,7 +4,7 @@ function ScoreCard({ score = 0, total = 0 }) {
   const percentage = total > 0 ? Math.round((score / total) * 100) : 0;
 
   let performance = {
-    label: "Needs Improvement",
+    label: "Week",
     color: "text-red-600",
     bg: "bg-red-50",
   };

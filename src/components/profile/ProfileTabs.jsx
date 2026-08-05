@@ -2,26 +2,11 @@ import { motion } from "framer-motion";
 
 function ProfileTabs({ activeTab, setActiveTab }) {
   const tabs = [
-    {
-      id: "profile",
-      label: "Profile",
-    },
-    {
-      id: "personal",
-      label: "Personal",
-    },
-    {
-      id: "security",
-      label: "Security",
-    },
-    {
-      id: "appearance",
-      label: "Appearance",
-    },
-    {
-      id: "notifications",
-      label: "Notifications",
-    },
+    { id: "profile", label: "Profile" },
+    { id: "personal", label: "Personal" },
+    { id: "security", label: "Security" },
+    { id: "appearance", label: "Appearance" },
+    { id: "notifications", label: "Notifications" },
   ];
 
   return (
@@ -35,8 +20,15 @@ function ProfileTabs({ activeTab, setActiveTab }) {
       <div
         className="
           flex
-          gap-6
+          items-center
+          gap-8
+
+          px-5
+          sm:px-7
+
           overflow-x-auto
+          lg:overflow-visible
+
           scrollbar-hide
         "
       >
@@ -45,35 +37,43 @@ function ProfileTabs({ activeTab, setActiveTab }) {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`
-                relative
-                pb-3
-                text-sm
-                font-medium
-                whitespace-nowrap
-                transition
-                duration-200
+              relative
+              flex-shrink-0
+              pb-4
 
-                ${
-                  activeTab === tab.id
-                    ? "text-primary"
-                    : "text-text-secondary hover:text-text-primary"
-                }
+              text-sm
+              font-medium
+              whitespace-nowrap
 
-              `}
+              transition-colors
+              duration-200
+
+              ${
+                activeTab === tab.id
+                  ? "text-primary"
+                  : "text-text-secondary hover:text-text-primary"
+              }
+            `}
           >
             {tab.label}
 
             {activeTab === tab.id && (
               <motion.div
                 layoutId="active-profile-tab"
+                transition={{
+                  type: "spring",
+                  stiffness: 500,
+                  damping: 35,
+                }}
                 className="
-                      absolute
-                      left-0
-                      right-0
-                      -bottom-[1px]
-                      h-[2px]
-                      bg-primary
-                    "
+                  absolute
+                  bottom-0
+                  left-0
+                  right-0
+
+                  h-[2px]
+                  bg-primary
+                "
               />
             )}
           </button>

@@ -1,33 +1,40 @@
+import EditableField from "../EditableField";
+
+import { useProfile } from "../../../context/ProfileContext";
+
 function ProfileInfo() {
-  const userInfo = [
+  const { profile, updateProfile } = useProfile();
+
+  const handleSave = (field, value) => {
+    updateProfile(field, value);
+  };
+
+  if (!profile) {
+    return <p className="text-text-secondary">Loading profile...</p>;
+  }
+
+  const fields = [
     {
       label: "Full Name",
-      value: "Basira",
+      field: "fullName",
     },
-
     {
       label: "Email",
-      value: "basira@example.com",
+      field: "email",
     },
-
     {
       label: "Role",
-      value: "Cyber Security Learner",
+      field: "role",
     },
-
     {
       label: "Member Since",
-      value: "August 2026",
+      field: "memberSince",
     },
   ];
 
   return (
-    <div
-      className="
-        space-y-6
-      "
-    >
-      {/* Section Title */}
+    <div className="space-y-6">
+      {/* Header */}
 
       <div>
         <h2
@@ -47,11 +54,11 @@ function ProfileInfo() {
             text-text-secondary
           "
         >
-          View your SafeNet account information.
+          Manage your SafeNet account information.
         </p>
       </div>
 
-      {/* Information Grid */}
+      {/* Editable Fields */}
 
       <div
         className="
@@ -61,38 +68,14 @@ function ProfileInfo() {
           md:grid-cols-2
         "
       >
-        {userInfo.map((item) => (
-          <div
-            key={item.label}
-            className="
-                rounded-none
-                border
-                border-border
-                bg-background
-                p-4
-                transition
-                hover:border-primary
-              "
-          >
-            <p
-              className="
-                  text-sm
-                  text-text-secondary
-                "
-            >
-              {item.label}
-            </p>
-
-            <p
-              className="
-                  mt-2
-                  font-medium
-                  text-text-primary
-                "
-            >
-              {item.value}
-            </p>
-          </div>
+        {fields.map((item) => (
+          <EditableField
+            key={item.field}
+            label={item.label}
+            field={item.field}
+            value={profile[item.field]}
+            onSave={handleSave}
+          />
         ))}
       </div>
     </div>

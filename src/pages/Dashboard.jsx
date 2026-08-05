@@ -15,6 +15,7 @@ import securityTips from "../data/securityTips";
 import achievementsData from "../data/achievements";
 
 import useAnalyses from "../hooks/useAnalyses";
+import { useProfile } from "../context/ProfileContext";
 
 import {
   getCompletedLessonsCount,
@@ -29,6 +30,8 @@ import {
 } from "../utils/simulationStorage";
 
 function Dashboard() {
+  const { profile } = useProfile();
+
   const analyses = useAnalyses();
 
   const completedLessons = getCompletedLessonsCount();
@@ -64,7 +67,10 @@ function Dashboard() {
       >
         {/* Header */}
 
-        <DashboardHeader userName="Ali" lastLogin="Today" />
+        <DashboardHeader
+          userName={profile?.fullName || "User"}
+          lastLogin="Today"
+        />
 
         {/* Security Summary */}
 
