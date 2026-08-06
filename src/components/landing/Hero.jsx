@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import HeroScanner from "./HeroScanner";
 
 function Hero() {
+  const navigate = useNavigate();
   return (
     <section
       className="
@@ -78,47 +80,43 @@ function Hero() {
               "
             >
               <button
+                onClick={() => navigate("/analyzer")}
                 className="
-                px-8
-                py-3.5
+                    px-7
+                    py-3
 
-                rounded-lg
+                    rounded-xl
 
-                bg-primary
+                    bg-primary
 
-                text-white
+                    text-white
 
-                font-medium
+                    hover:bg-primary-hover
 
-                hover:bg-primary-hover
-
-                transition
-
-                shadow-lg
-                shadow-primary/20
-                "
+                    transition
+                    "
               >
                 Analyze a Threat
               </button>
 
               <button
+                onClick={() => navigate("/register")}
                 className="
-                px-8
-                py-3.5
+                    px-7
+                    py-3
 
-                rounded-lg
+                    rounded-xl
 
-                border
-                border-border
+                    border
 
-                bg-transparent
+                    border-border
 
-                text-text-primary
+                    text-text-primary
 
-                hover:bg-surface
+                    hover:bg-surface
 
-                transition
-                "
+                    transition
+                    "
               >
                 Create Account
               </button>

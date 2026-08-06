@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 function CTASection() {
+  const navigate = useNavigate();
+
   return (
     <section
       className="
@@ -99,11 +103,13 @@ function CTASection() {
           gap-4
           "
         >
-          <button
-            className="
-            px-8
+          {/* Quick Analyzer */}
 
-            py-3.5
+          <button
+            onClick={() => navigate("/analyzer")}
+            className="
+            px-7
+            py-3
 
             rounded-xl
 
@@ -111,25 +117,21 @@ function CTASection() {
 
             text-white
 
-            font-medium
-
             hover:bg-primary-hover
 
             transition
-
-            shadow-lg
-
-            shadow-primary/20
             "
           >
             Analyze a Threat
           </button>
 
-          <button
-            className="
-            px-8
+          {/* Register */}
 
-            py-3.5
+          <button
+            onClick={() => navigate("/register")}
+            className="
+            px-7
+            py-3
 
             rounded-xl
 

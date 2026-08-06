@@ -1,6 +1,46 @@
-import { Mail, Lock, ShieldCheck } from "lucide-react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { Mail, Lock, ShieldCheck, Eye, EyeOff } from "lucide-react";
+
+import { supabase } from "../lib/supabase";
 
 function Login() {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const [rememberMe, setRememberMe] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+
+  const [error, setError] = useState("");
+
+  async function handleLogin(e) {
+    e.preventDefault();
+
+    setError("");
+
+    setLoading(true);
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+
+      password,
+    });
+
+    if (error) {
+      setError(error.message);
+    } else {
+      navigate("/dashboard");
+    }
+
+    setLoading(false);
+  }
+
   return (
     <div
       className="
@@ -55,7 +95,6 @@ function Login() {
           justify-center
 
           bg-background
-
           "
         >
           <h1
@@ -80,7 +119,8 @@ function Login() {
             Access your SafeNet account
           </p>
 
-          <div
+          <form
+            onSubmit={handleLogin}
             className="
             mt-10
 
@@ -107,8 +147,11 @@ function Login() {
               <Mail size={20} className="text-primary" />
 
               <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 placeholder="Email"
+                required
                 className="
                 w-full
 
@@ -127,60 +170,135 @@ function Login() {
 
             <div
               className="
-              flex
+                flex
+                items-center
+                gap-3
 
-              items-center
+                border-b
+                border-border
 
-              gap-3
-
-              border-b
-
-              border-border
-
-              pb-3
-              "
+                pb-3
+                "
             >
-              <Lock size={20} className="text-primary" />
+              <Lock size={19} className="text-primary" />
 
               <input
-                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type={showPassword ? "text" : "password"}
                 placeholder="Password"
+                required
                 className="
-                w-full
+                  w-full
 
-                bg-transparent
+                  bg-transparent
 
-                outline-none
+                  outline-none
 
-                text-text-primary
+                  text-sm
 
-                placeholder:text-text-secondary
-                "
+                  text-text-primary
+
+                  placeholder:text-text-secondary
+                  "
               />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="text-text-secondary hover:text-primary transition"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
             </div>
-          </div>
 
-          <button
-            className="
-            mt-10
+            <div
+              className="
+  flex
 
-            py-3
+  items-center
 
-            rounded-lg
+  justify-between
 
-            bg-primary
+  text-sm
+  "
+            >
+              <label
+                className="
+    flex
 
-            text-white
+    items-center
 
-            font-medium
+    gap-2
 
-            hover:bg-primary-hover
+    cursor-pointer
 
-            transition
-            "
-          >
-            Login
-          </button>
+    text-text-secondary
+    "
+              >
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  className="accent-primary"
+                />
+                Remember me
+              </label>
+
+              <button
+                type="button"
+                className="
+    text-primary
+
+    hover:underline
+    "
+              >
+                Forgot Password?
+              </button>
+            </div>
+
+            {error && (
+              <p
+                className="
+                  text-sm
+
+                  text-red-400
+                  "
+              >
+                {error}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="
+  w-full
+
+  mt-2
+
+  py-3
+
+  rounded-xl
+
+  bg-primary
+
+  text-white
+
+  font-medium
+
+  hover:bg-primary-hover
+
+  transition
+
+  disabled:opacity-50
+
+  disabled:cursor-not-allowed
+  "
+            >
+              {loading ? "Signing In..." : "Login"}
+            </button>
+          </form>
 
           <p
             className="
@@ -193,6 +311,7 @@ function Login() {
           >
             Don't have an account?
             <span
+              onClick={() => navigate("/register")}
               className="
               ml-2
 
@@ -227,8 +346,6 @@ function Login() {
           overflow-hidden
           "
         >
-          {/* Diagonal Shape */}
-
           <div
             className="
             absolute
@@ -254,17 +371,19 @@ function Login() {
             text-center
 
             px-10
-
             "
           >
             <div
+              onClick={() => navigate("/")}
               className="
-              flex
+                cursor-pointer
 
-              justify-center
+                flex
 
-              mb-6
-              "
+                justify-center
+
+                mb-6
+                "
             >
               <ShieldCheck size={55} className="text-primary" />
             </div>

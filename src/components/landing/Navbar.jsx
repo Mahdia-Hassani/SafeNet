@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ShieldCheck, ChevronDown, Menu, X } from "lucide-react";
 
 function Navbar() {
   const [openMenu, setOpenMenu] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <header
@@ -160,6 +162,7 @@ function Navbar() {
           "
         >
           <button
+            onClick={() => navigate("/login")}
             className="
             hidden
             sm:block
@@ -177,27 +180,29 @@ function Navbar() {
           </button>
 
           <button
+            onClick={() => navigate("/register")}
             className="
-            px-6
-            py-2.5
+                px-6
+                py-2.5
 
-            rounded-lg
+                rounded-xl
 
-            bg-primary
+                bg-primary
 
-            text-white
+                text-white
 
-            text-sm
+                text-sm
 
-            font-medium
+                font-medium
 
-            hover:bg-primary-hover
+                hover:bg-primary-hover
 
-            transition
+                transition
 
-            shadow-lg
-            shadow-primary/20
-            "
+                shadow-lg
+
+                shadow-primary/20
+                "
           >
             Get Started
           </button>

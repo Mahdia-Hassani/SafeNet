@@ -1,6 +1,52 @@
-import { Mail, Lock, ShieldCheck } from "lucide-react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { Mail, Lock, User, ShieldCheck } from "lucide-react";
+import { supabase } from "../lib/supabase";
 
 function Register() {
+  const navigate = useNavigate();
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [error, setError] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+  async function handleRegister(e) {
+    e.preventDefault();
+
+    setError("");
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    setLoading(true);
+
+    const { data, error: signUpError } = await supabase.auth.signUp({
+      email,
+      password,
+
+      options: {
+        data: {
+          full_name: fullName,
+        },
+      },
+    });
+
+    if (signUpError) {
+      setError(signUpError.message);
+    } else {
+      navigate("/dashboard");
+    }
+
+    setLoading(false);
+  }
+
   return (
     <div
       className="
@@ -57,35 +103,58 @@ function Register() {
           bg-background
           "
         >
-          <h1
-            className="
-            text-3xl
-
-            font-semibold
-
-            text-text-primary
-            "
-          >
+          <h1 className="text-2xl font-semibold text-text-primary">
             Create Account
           </h1>
 
-          <p
-            className="
-            mt-3
-
-            text-text-secondary
-            "
-          >
+          <p className="mt-2 text-sm text-text-secondary">
             Start your journey with SafeNet
           </p>
 
-          <div
+          <form
+            onSubmit={handleRegister}
             className="
-            mt-8
-
-            space-y-5
+           mt-6
+          space-y-4
             "
           >
+            {/* Full Name */}
+
+            <div
+              className="
+  flex
+  items-center
+  gap-3
+
+  border-b
+  border-border
+
+  pb-2
+  "
+            >
+              <User size={19} className="text-primary" />
+
+              <input
+                type="text"
+                required
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Full Name"
+                className="
+                  w-full
+
+                  bg-transparent
+
+                  outline-none
+
+                  text-sm
+
+                  text-text-primary
+
+                  placeholder:text-text-secondary
+                  "
+              />
+            </div>
             {/* Email */}
 
             <div
@@ -103,20 +172,19 @@ function Register() {
               pb-3
               "
             >
-              <Mail size={20} className="text-primary" />
+              <Mail size={19} className="text-primary" />
 
               <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 placeholder="Email"
+                required
                 className="
                 w-full
-
                 bg-transparent
-
                 outline-none
-
                 text-text-primary
-
                 placeholder:text-text-secondary
                 "
               />
@@ -139,11 +207,14 @@ function Register() {
               pb-3
               "
             >
-              <Lock size={20} className="text-primary" />
+              <Lock size={19} className="text-primary" />
 
               <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 placeholder="Password"
+                required
                 className="
                 w-full
 
@@ -175,11 +246,14 @@ function Register() {
               pb-3
               "
             >
-              <Lock size={20} className="text-primary" />
+              <Lock size={19} className="text-primary" />
 
               <input
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 type="password"
                 placeholder="Confirm Password"
+                required
                 className="
                 w-full
 
@@ -193,29 +267,46 @@ function Register() {
                 "
               />
             </div>
-          </div>
 
-          <button
-            className="
-            mt-8
+            {error && (
+              <p
+                className="
+                  text-sm
 
-            py-3
+                  text-red-400
+                  "
+              >
+                {error}
+              </p>
+            )}
 
-            rounded-lg
+            <button
+              disabled={loading}
+              className="
+              w-full
 
-            bg-primary
+              mt-4
 
-            text-white
+              py-3
 
-            font-medium
+              rounded-lg
 
-            hover:bg-primary-hover
+              bg-primary
 
-            transition
-            "
-          >
-            Create Account
-          </button>
+              text-white
+
+              font-medium
+
+              hover:bg-primary-hover
+
+              transition
+
+              disabled:opacity-50
+              "
+            >
+              {loading ? "Creating..." : "Create Account"}
+            </button>
+          </form>
 
           <p
             className="
@@ -228,6 +319,7 @@ function Register() {
           >
             Already have an account?
             <span
+              onClick={() => navigate("/login")}
               className="
               ml-2
 
@@ -262,8 +354,6 @@ function Register() {
           overflow-hidden
           "
         >
-          {/* Diagonal */}
-
           <div
             className="
             absolute
@@ -292,13 +382,16 @@ function Register() {
             "
           >
             <div
+              onClick={() => navigate("/")}
               className="
-              flex
+                cursor-pointer
 
-              justify-center
+                flex
 
-              mb-6
-              "
+                justify-center
+
+                mb-6
+                "
             >
               <ShieldCheck size={55} className="text-primary" />
             </div>

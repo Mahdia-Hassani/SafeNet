@@ -6,6 +6,7 @@ import HowItWorks from "../components/landing/HowItWorks";
 import SecurityTrust from "../components/landing/SecurityTrust";
 import CTASection from "../components/landing/CTASection";
 import Footer from "../components/landing/Footer";
+import Assistant from "../components/assistant/Assistant";
 
 function Home() {
   return (
@@ -18,6 +19,7 @@ function Home() {
       <SecurityTrust />
       <CTASection />
       <Footer />
+      <Assistant />
     </>
   );
 }
