@@ -1,16 +1,108 @@
-# React + Vite
+# SafeNet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### AI-Powered Cybersecurity Awareness Platform
 
-Currently, two official plugins are available:
+SafeNet is an AI-powered cybersecurity awareness platform designed to help users identify online threats, understand common scams, and build safer digital habits.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Users can submit suspicious emails, messages, or website content. SafeNet analyzes the content, detects potential risks, explains warning signs, and provides recommendations to improve online safety.
 
-## React Compiler
+The goal of SafeNet is to reduce the risk of phishing attacks, online scams, identity theft, and other common cybersecurity threats through AI-powered education.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Live Demo
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🔗 https://safenet.ms-hassani-mail.workers.dev/
+
+---
+
+# Features
+
+## Scam Analyzer
+
+Analyze suspicious emails, messages, and online content.
+
+Features:
+
+- Detect possible scam indicators
+- Identify phishing patterns
+- Explain security risks
+- Provide safety recommendations
+
+## AI Threat Explanation
+
+SafeNet explains:
+
+- Why a message may be dangerous
+- What warning signs exist
+- What actions users should take
+
+## Security Coaching
+
+Provides beginner-friendly cybersecurity guidance based on detected threats.
+
+Examples:
+
+- Password safety
+- Phishing prevention
+- Online privacy
+- Safe browsing habits
+
+## Threat Simulation Quiz
+
+Interactive cybersecurity scenarios that help users practice responding to real-world threats.
+
+Includes:
+
+- Multiple-choice challenges
+- Immediate feedback
+- Progress tracking
+
+## Progress Dashboard
+
+Users can monitor their cybersecurity learning progress.
+
+Tracks:
+
+- Completed lessons
+- Quiz results
+- Safety score
+- Threat analysis history
+
+## User Authentication
+
+Implemented with Supabase Authentication.
+
+Includes:
+
+- User registration
+- Login system
+- User profiles
+- Logout functionality
+
+---
+
+# Tech Stack
+
+## Frontend
+
+- React
+- Vite
+- Tailwind CSS
+- React Router
+- Lucide Icons
+
+## Backend / Services
+
+- Supabase Authentication
+- Supabase Database
+- OpenRouter API (AI Analysis)
+
+## Storage
+
+- LocalStorage
+- Supabase Database
+
+## Deployment
+
+- Cloudflare Workers & Pages
