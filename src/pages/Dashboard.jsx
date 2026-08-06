@@ -9,13 +9,13 @@ import RecentAnalyses from "../components/dashboard/RecentAnalyess";
 import LatestNotes from "../components/dashboard/LatestNotes";
 import SecurityTip from "../components/dashboard/SecurityTip";
 import Achievements from "../components/dashboard/Achievements";
+import { useProfile } from "../context/ProfileContext";
 
 import lessons from "../data/lesson";
 import securityTips from "../data/securityTips";
 import achievementsData from "../data/achievements";
 
 import useAnalyses from "../hooks/useAnalyses";
-import { useProfile } from "../context/ProfileContext";
 
 import {
   getCompletedLessonsCount,
@@ -30,9 +30,8 @@ import {
 } from "../utils/simulationStorage";
 
 function Dashboard() {
-  const { profile } = useProfile();
-
   const analyses = useAnalyses();
+  const { profile } = useProfile();
 
   const completedLessons = getCompletedLessonsCount();
 
@@ -65,14 +64,10 @@ function Dashboard() {
           overflow-x-hidden
         "
       >
-        {/* Header */}
-
         <DashboardHeader
           userName={profile?.fullName || "User"}
           lastLogin="Today"
         />
-
-        {/* Security Summary */}
 
         <div
           className="
@@ -82,11 +77,7 @@ function Dashboard() {
             gap-6
           "
         >
-          <div
-            className="
-              xl:col-span-4
-            "
-          >
+          <div className="xl:col-span-4">
             <SafetyScore
               score={learningProgress}
               completedLessons={completedLessons}
@@ -95,12 +86,7 @@ function Dashboard() {
             />
           </div>
 
-          <div
-            className="
-              xl:col-span-8
-              min-w-0
-            "
-          >
+          <div className="xl:col-span-8 min-w-0">
             <SecurityOverview
               lessons={completedLessons}
               simulations={simulationResults.length}
@@ -112,11 +98,7 @@ function Dashboard() {
           </div>
         </div>
 
-        {/* Security Tip */}
-
         <SecurityTip tip={securityTips[0]} />
-
-        {/* Progress */}
 
         <div
           className="
@@ -140,8 +122,6 @@ function Dashboard() {
           />
         </div>
 
-        {/* Recent Activity */}
-
         <div
           className="
             grid
@@ -155,8 +135,6 @@ function Dashboard() {
 
           <LatestNotes notes={notes} latestNote={latestNote} />
         </div>
-
-        {/* Achievements */}
 
         <Achievements achievements={achievementsData} />
       </div>

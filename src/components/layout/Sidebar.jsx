@@ -1,4 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { LogOut } from "lucide-react";
+import { supabase } from "../../lib/supabase";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import {
   LayoutDashboard,
@@ -6,7 +8,6 @@ import {
   BookOpen,
   Target,
   User,
-  Settings,
   Shield,
   X,
 } from "lucide-react";
@@ -35,6 +36,18 @@ const navItems = [
 ];
 
 function Sidebar({ mobileOpen, setMobileOpen }) {
+  const navigate = useNavigate();
+
+  async function handleLogout() {
+    const { error } = await supabase.auth.signOut();
+
+    if (!error) {
+      navigate("/login", {
+        replace: true,
+      });
+    }
+  }
+
   return (
     <aside
       className={`
@@ -68,13 +81,19 @@ function Sidebar({ mobileOpen, setMobileOpen }) {
           px-6
         "
       >
-        <div className="flex items-center gap-3">
+        <div
+          onClick={() => navigate("/")}
+          className="
+            flex
+            items-center
+            gap-3
+            cursor-pointer
+          "
+        >
           <Shield size={30} className="text-primary" />
 
           <h1 className="text-2xl font-bold text-primary">SafeNet</h1>
         </div>
-
-        {/* Mobile Close Button */}
 
         <button
           onClick={() => setMobileOpen(false)}
@@ -110,22 +129,23 @@ function Sidebar({ mobileOpen, setMobileOpen }) {
                 onClick={() => setMobileOpen(false)}
                 className={({ isActive }) =>
                   `
-                  flex
-                  items-center
-                  gap-4
-                  px-4
-                  py-3
-                  text-sm
-                  font-medium
-                  transition
+                flex
+                items-center
+                gap-4
+                px-4
+                py-3
+                text-sm
+                font-medium
+                transition
 
-                  ${
-                    isActive
-                      ? "bg-primary text-white shadow-sm"
-                      : "text-text-secondary hover:bg-card hover:text-text-primary"
-                  }
 
-                  `
+                ${
+                  isActive
+                    ? "bg-primary text-white shadow-sm"
+                    : "text-text-secondary hover:bg-card hover:text-text-primary"
+                }
+
+                `
                 }
               >
                 <Icon size={21} />
@@ -165,6 +185,27 @@ function Sidebar({ mobileOpen, setMobileOpen }) {
 
           <span>Profile</span>
         </NavLink>
+
+        {/* Logout */}
+
+        <button
+          onClick={handleLogout}
+          className="
+            w-full
+            flex
+            items-center
+            gap-4
+            px-4
+            py-3
+            text-red-500
+            hover:bg-red-50
+            transition
+          "
+        >
+          <LogOut size={20} />
+
+          <span>Logout</span>
+        </button>
       </div>
     </aside>
   );

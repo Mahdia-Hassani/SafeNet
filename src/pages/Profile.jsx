@@ -12,16 +12,38 @@ import SecuritySettings from "../components/profile/tabs/Securitysetting";
 import AppearanceSettings from "../components/profile/tabs/AppearanceSettings";
 import NotificationSettings from "../components/profile/tabs/NotificationSetting";
 
+import { useProfile } from "../context/ProfileContext";
+
 function Profile() {
   const [activeTab, setActiveTab] = useState("profile");
+
+  const { profile, loading } = useProfile();
+
+  if (loading) {
+    return (
+      <DashboardLayout>
+        <div
+          className="
+          min-h-screen
+          flex
+          items-center
+          justify-center
+          text-text-secondary
+          "
+        >
+          Loading profile...
+        </div>
+      </DashboardLayout>
+    );
+  }
 
   const renderContent = () => {
     switch (activeTab) {
       case "profile":
-        return <ProfileInfo />;
+        return <ProfileInfo profile={profile} />;
 
       case "personal":
-        return <PersonalInfo />;
+        return <PersonalInfo profile={profile} />;
 
       case "security":
         return <SecuritySettings />;
@@ -33,7 +55,7 @@ function Profile() {
         return <NotificationSettings />;
 
       default:
-        return <ProfileInfo />;
+        return <ProfileInfo profile={profile} />;
     }
   };
 
@@ -41,19 +63,18 @@ function Profile() {
     <DashboardLayout>
       <div
         className="
-          min-h-screen
-          bg-background
-          text-text-primary
-          space-y-6
+        min-h-screen
+        bg-background
+        text-text-primary
+        space-y-6
         "
       >
-        {/* Page Header */}
-
-        <ProfileHeader onEditProfile={() => setActiveTab("profile")} />
+        <ProfileHeader
+          profile={profile}
+          onEditProfile={() => setActiveTab("profile")}
+        />
 
         <ProfileTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-
-        {/* Content Card */}
 
         <ProfileCard>{renderContent()}</ProfileCard>
       </div>

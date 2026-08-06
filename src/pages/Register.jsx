@@ -27,24 +27,54 @@ function Register() {
 
     setLoading(true);
 
-    const { data, error: signUpError } = await supabase.auth.signUp({
-      email,
-      password,
+    try {
+      // Create Auth User
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
 
-      options: {
-        data: {
-          full_name: fullName,
+        options: {
+          data: {
+            full_name: fullName,
+          },
         },
-      },
-    });
+      });
 
-    if (signUpError) {
-      setError(signUpError.message);
-    } else {
+      if (signUpError) {
+        setError(signUpError.message);
+        return;
+      }
+
+      const user = data.user;
+
+      if (!user) {
+        setError("Please check your email to confirm your account.");
+
+        return;
+      }
+
+      // Save Profile Data
+      const { error: profileError } = await supabase.from("profiles").insert([
+        {
+          id: user.id,
+          full_name: fullName,
+          email: email,
+        },
+      ]);
+
+      if (profileError) {
+        setError(profileError.message);
+        return;
+      }
+
       navigate("/dashboard");
-    }
+    } catch (error) {
+      setError("Something went wrong. Please try again.");
 
-    setLoading(false);
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (

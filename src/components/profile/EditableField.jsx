@@ -3,122 +3,78 @@ import { Edit3, Check, X } from "lucide-react";
 
 function EditableField({ label, field, value, onSave }) {
   const [editing, setEditing] = useState(false);
+  const [newValue, setNewValue] = useState(value || "");
 
-  const [inputValue, setInputValue] = useState(value);
-
-  const handleSave = () => {
-    onSave(field, inputValue);
-
+  function handleSave() {
+    onSave(field, newValue);
     setEditing(false);
-  };
+  }
 
-  const handleCancel = () => {
-    setInputValue(value);
-
+  function handleCancel() {
+    setNewValue(value || "");
     setEditing(false);
-  };
+  }
 
   return (
     <div
       className="
-        border
-        border-border
-        bg-background
-        p-4
-        transition
-        hover:border-primary
+      border
+      border-border
+      bg-background
+      p-5
       "
     >
-      <p
-        className="
-          text-sm
-          text-text-secondary
-        "
-      >
-        {label}
-      </p>
+      <div className="flex items-center justify-between">
+        <p className="text-sm text-text-secondary">{label}</p>
 
-      {!editing ? (
-        <div
-          className="
-            mt-3
-            flex
-            items-center
-            justify-between
-            gap-3
-          "
-        >
-          <p
-            className="
-              font-medium
-              text-text-primary
-            "
-          >
-            {value}
-          </p>
-
+        {!editing && (
           <button
             onClick={() => setEditing(true)}
             className="
-              text-primary
-              transition
-              hover:opacity-80
+            text-primary
+            hover:opacity-80
             "
           >
-            <Edit3 size={18} />
+            <Edit3 size={16} />
           </button>
-        </div>
-      ) : (
-        <div className="mt-3 space-y-3">
+        )}
+      </div>
+
+      {editing ? (
+        <div className="mt-3 flex gap-2">
           <input
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            value={newValue}
+            onChange={(e) => setNewValue(e.target.value)}
             className="
-              w-full
-              border
-              border-border
-              bg-background
-              px-3
-              py-2
-              outline-none
-              focus:border-primary
+            w-full
+            bg-transparent
+            border
+            border-border
+            px-3
+            py-2
+            outline-none
+            text-text-primary
             "
           />
 
-          <div className="flex gap-2">
-            <button
-              onClick={handleSave}
-              className="
-                flex
-                items-center
-                gap-2
-                bg-primary
-                px-4
-                py-2
-                text-white
-              "
-            >
-              <Check size={16} />
-              Save
-            </button>
+          <button onClick={handleSave} className="text-primary">
+            <Check size={18} />
+          </button>
 
-            <button
-              onClick={handleCancel}
-              className="
-                flex
-                items-center
-                gap-2
-                border
-                border-border
-                px-4
-                py-2
-              "
-            >
-              <X size={16} />
-              Cancel
-            </button>
-          </div>
+          <button onClick={handleCancel} className="text-red-400">
+            <X size={18} />
+          </button>
         </div>
+      ) : (
+        <h3
+          className="
+          mt-3
+          font-medium
+          text-text-primary
+          "
+        >
+          {value || "Not set"}
+        </h3>
       )}
     </div>
   );

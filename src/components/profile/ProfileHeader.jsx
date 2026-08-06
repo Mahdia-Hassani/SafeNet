@@ -1,9 +1,6 @@
 import { Edit3, ShieldCheck } from "lucide-react";
-import { useProfile } from "../../context/ProfileContext";
 
-function ProfileHeader({ onEditProfile }) {
-  const { profile } = useProfile();
-
+function ProfileHeader({ profile, onEditProfile }) {
   if (!profile) return null;
 
   return (
@@ -54,7 +51,7 @@ function ProfileHeader({ onEditProfile }) {
                 text-text-primary
               "
             >
-              {profile.fullName}
+              {profile.fullName || "User"}
             </h1>
 
             <p
@@ -63,7 +60,7 @@ function ProfileHeader({ onEditProfile }) {
                 text-text-secondary
               "
             >
-              {profile.role}
+              {profile.email}
             </p>
 
             <div
