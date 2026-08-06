@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import Sidebar from "../components/layout/Sidebar";
-import Topbar from "../components/layout/Topbar";
+import Topbar from "../components/layout/TopBar";
 import Assistant from "../components/assistant/Assistant";
 
 function DashboardLayout({ children }) {
