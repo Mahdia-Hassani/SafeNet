@@ -26,7 +26,7 @@ function SimulationIntro({ scenarios = 5, difficulty = "Intermediate" }) {
             text-text-primary
           "
         >
-          Threat Simulation
+          Security Challenge
         </h2>
 
         <p

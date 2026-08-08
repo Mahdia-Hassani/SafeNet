@@ -19,7 +19,7 @@ const navItems = [
     icon: LayoutDashboard,
   },
   {
-    name: "Scam Analyzer",
+    name: "Threat Analyzer",
     path: "/analyzer",
     icon: ShieldAlert,
   },
@@ -29,7 +29,7 @@ const navItems = [
     icon: BookOpen,
   },
   {
-    name: "Threat Simulation",
+    name: "Security Challenge",
     path: "/simulation",
     icon: Target,
   },

@@ -7,7 +7,7 @@ import Dashboard from "../pages/Dashboard";
 import ScamAnalyzer from "../pages/ScamAnalyzer";
 import AnalysisReport from "../pages/AnalysisReport";
 import LearningCenter from "../pages/LearningCenter";
-import ThreatSimulation from "../pages/ThreatSimulation";
+import SecurityChallenge from "../pages/SecurityChallenge";
 import SimulationSession from "../pages/SimulationSession";
 import SimulationReport from "../pages/SimulationReport";
 import Profile from "../pages/Profile";
@@ -25,7 +25,7 @@ function AppRoutes() {
       <Route path="/analysis/:id" element={<AnalysisReport />} />
       <Route path="/learning" element={<LearningCenter />} />
       <Route path="/learning/:id" element={<CourseDetails />} />
-      <Route path="/simulation" element={<ThreatSimulation />} />
+      <Route path="/simulation" element={<SecurityChallenge />} />
       <Route path="/simulation/session" element={<SimulationSession />} />
       <Route path="/simulation/report" element={<SimulationReport />} />
       <Route path="/profile" element={<Profile />} />

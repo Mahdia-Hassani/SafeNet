@@ -90,7 +90,6 @@ Includes:
 - Vite
 - Tailwind CSS
 - React Router
-- Lucide Icons
 
 ## Backend / Services
 

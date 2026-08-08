@@ -7,7 +7,7 @@ import SimulationHeader from "../components/simulation/SimulationHeader";
 import SimulationProgress from "../components/simulation/SimulationProgress";
 import ScoreCard from "../components/simulation/ScoreCard";
 
-function ThreatSimulation() {
+function SecurityChallenge() {
   const navigate = useNavigate();
 
   const progress = JSON.parse(localStorage.getItem("simulation_progress")) || {
@@ -179,4 +179,4 @@ function ThreatSimulation() {
   );
 }
 
-export default ThreatSimulation;
+export default SecurityChallenge;

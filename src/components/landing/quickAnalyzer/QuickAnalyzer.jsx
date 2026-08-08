@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ShieldCheck, LockKeyhole, ArrowRight } from "lucide-react";
 
 import AnalyzerTabs from "./AnalyzerTabs";
 import MessageInput from "./MessageInput";
@@ -7,101 +9,326 @@ import FileUpload from "./FileUpload";
 
 function QuickAnalyzer() {
   const [activeTab, setActiveTab] = useState("message");
-
   const [inputValue, setInputValue] = useState("");
 
-  function handleAnalyze() {
-    console.log({
-      type: activeTab,
-      content: inputValue,
-    });
+  const navigate = useNavigate();
 
-    // بعداً Navigate به Result Page
+  function handleAnalyze() {
+    if (!inputValue.trim()) {
+      return;
+    }
+
+    navigate("/analyzer", {
+      state: {
+        type: activeTab,
+        content: inputValue,
+      },
+    });
+  }
+
+  function handleTabChange(tab) {
+    setActiveTab(tab);
+    setInputValue("");
   }
 
   return (
-    <section className="py-24 bg-background">
+    <section
+      id="quick-analyzer"
+      className="
+        py-24
+        lg:py-32
+        bg-background
+        scroll-mt-24
+      "
+    >
       <div
         className="
-        max-w-4xl
-        mx-auto
-        px-6
+          max-w-5xl
+          mx-auto
+          px-6
         "
       >
         {/* Header */}
 
-        <div className="text-center mb-12">
-          <h2
+        <div
+          className="
+            max-w-3xl
+            mx-auto
+            text-center
+            mb-12
+          "
+        >
+          <div
             className="
-            text-4xl
-            font-bold
-            text-text-primary
+              inline-flex
+              items-center
+              gap-2
+              px-4
+              py-2
+
+              rounded-full
+
+              border
+              border-primary/20
+
+              bg-primary/5
+
+              text-sm
+              font-medium
+              text-primary
             "
           >
-            SafeNet AI Analyzer
+            <ShieldCheck size={17} />
+            Try SafeNet
+          </div>
+
+          <h2
+            className="
+              mt-6
+
+              text-4xl
+              lg:text-5xl
+
+              font-semibold
+
+              text-text-primary
+            "
+          >
+            Check Something Suspicious
           </h2>
 
           <p
             className="
-            mt-4
-            text-text-secondary
+              mt-5
+
+              text-lg
+              leading-relaxed
+
+              text-text-secondary
             "
           >
-            Analyze suspicious messages, URLs and files before they become
-            threats.
+            Paste a suspicious message, check a URL, or upload a file and
+            continue with SafeNet's security analyzer.
           </p>
         </div>
 
-        {/* Tabs */}
+        {/* Analyzer */}
 
-        <AnalyzerTabs
-          activeTab={activeTab}
-          setActiveTab={(tab) => {
-            setActiveTab(tab);
+        <div
+          className="
+            relative
 
-            setInputValue("");
-          }}
-        />
+            border
+            border-border
 
-        {/* Input */}
+            bg-surface
 
-        <div className="mt-8">
-          {activeTab === "message" && (
-            <MessageInput value={inputValue} setValue={setInputValue} />
-          )}
+            p-6
+            sm:p-8
+            lg:p-10
 
-          {activeTab === "url" && (
-            <UrlInput value={inputValue} setValue={setInputValue} />
-          )}
+            shadow-xl
+            shadow-primary/5
+          "
+        >
+          {/* Top Status */}
 
-          {activeTab === "file" && <FileUpload setValue={setInputValue} />}
-        </div>
-
-        {/* Button */}
-
-        <div className="flex justify-center mt-8">
-          <button
-            onClick={handleAnalyze}
+          <div
             className="
-            px-10
-            py-3
+              flex
+              items-center
+              justify-between
 
-            rounded-xl
+              pb-5
+              mb-6
 
-            bg-primary
-
-            text-white
-
-            font-medium
-
-            hover:bg-primary-hover
-
-            transition
+              border-b
+              border-border
             "
           >
-            Analyze with AI
-          </button>
+            <div
+              className="
+                flex
+                items-center
+                gap-3
+              "
+            >
+              <div
+                className="
+                  w-10
+                  h-10
+
+                  rounded-lg
+
+                  bg-primary/10
+
+                  flex
+                  items-center
+                  justify-center
+                "
+              >
+                <ShieldCheck size={22} className="text-primary" />
+              </div>
+
+              <div>
+                <p
+                  className="
+                    text-sm
+                    font-semibold
+                    text-text-primary
+                  "
+                >
+                  SafeNet Analyzer
+                </p>
+
+                <p
+                  className="
+                    text-xs
+                    text-text-secondary
+                  "
+                >
+                  Ready to scan
+                </p>
+              </div>
+            </div>
+
+            <div
+              className="
+                flex
+                items-center
+                gap-2
+
+                text-xs
+                text-text-secondary
+              "
+            >
+              <span
+                className="
+                  w-2
+                  h-2
+
+                  rounded-full
+
+                  bg-primary
+
+                  animate-pulse
+                "
+              />
+              Scanner ready
+            </div>
+          </div>
+
+          {/* Tabs */}
+
+          <AnalyzerTabs activeTab={activeTab} setActiveTab={handleTabChange} />
+
+          {/* Input */}
+
+          <div className="mt-8">
+            {activeTab === "message" && (
+              <MessageInput value={inputValue} setValue={setInputValue} />
+            )}
+
+            {activeTab === "url" && (
+              <UrlInput value={inputValue} setValue={setInputValue} />
+            )}
+
+            {activeTab === "file" && <FileUpload setValue={setInputValue} />}
+          </div>
+
+          {/* Action */}
+
+          <div
+            className="
+              mt-8
+
+              flex
+              flex-col
+              sm:flex-row
+
+              items-center
+              justify-between
+
+              gap-5
+            "
+          >
+            <div
+              className="
+                flex
+                items-center
+                gap-2
+
+                text-xs
+
+                text-text-secondary
+              "
+            >
+              <LockKeyhole size={15} className="text-primary" />
+              Analyze suspicious content safely.
+            </div>
+
+            <button
+              onClick={handleAnalyze}
+              disabled={!inputValue.trim()}
+              className="
+                group
+
+                w-full
+                sm:w-auto
+
+                px-7
+                py-3
+
+                rounded-xl
+
+                bg-primary
+
+                text-white
+
+                text-sm
+                font-medium
+
+                flex
+                items-center
+                justify-center
+                gap-2
+
+                hover:bg-primary-hover
+
+                disabled:opacity-50
+                disabled:cursor-not-allowed
+
+                transition
+              "
+            >
+              Analyze with AI
+              <ArrowRight
+                size={17}
+                className="
+                  transition-transform
+                  duration-300
+                  group-hover:translate-x-1
+                "
+              />
+            </button>
+          </div>
         </div>
+
+        {/* Bottom Note */}
+
+        <p
+          className="
+            mt-5
+
+            text-center
+
+            text-xs
+
+            text-text-secondary
+          "
+        >
+          No account required to start analyzing suspicious content.
+        </p>
       </div>
     </section>
   );

@@ -1,208 +1,215 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ShieldCheck, ChevronDown, Menu, X } from "lucide-react";
+import { ShieldCheck, Menu, X } from "lucide-react";
 
 function Navbar() {
   const [openMenu, setOpenMenu] = useState(false);
+
   const navigate = useNavigate();
+
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+
+    setOpenMenu(false);
+  };
+
+  const goToHome = () => {
+    navigate("/");
+    setOpenMenu(false);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <header
       className="
-      sticky
-      top-0
-      z-50
+        sticky
+        top-0
+        z-50
+        w-full
 
-      w-full
+        bg-background/80
+        backdrop-blur-lg
 
-      bg-background/80
-      backdrop-blur-lg
-
-      border-b
-      border-border/50
+        border-b
+        border-border/50
       "
     >
       <div
         className="
-        max-w-7xl
-        mx-auto
+          max-w-7xl
+          mx-auto
 
-        h-20
+          h-20
+          px-6
 
-        px-6
-
-        flex
-        items-center
-        justify-between
+          flex
+          items-center
+          justify-between
         "
       >
         {/* Logo */}
 
-        <div
+        <button
+          onClick={goToHome}
           className="
-          flex
-          items-center
-          gap-3
+            flex
+            items-center
+            gap-3
+
+            cursor-pointer
           "
         >
           <div
             className="
-            w-11
-            h-11
+              w-11
+              h-11
 
-            rounded-lg
+              flex
+              items-center
+              justify-center
 
-            bg-primary/10
+              rounded-full
 
-            border
-            border-primary/30
-
-            flex
-            items-center
-            justify-center
+              border
+              border-primary/0
             "
           >
-            <ShieldCheck size={26} className="text-primary" />
+            <ShieldCheck size={40} className="text-primary" />
           </div>
 
-          <h1
+          <span
             className="
-            text-xl
-            font-semibold
-            text-text-primary
+              text-xl
+              font-semibold
+              text-text-primary
             "
           >
             SafeNet
-          </h1>
-        </div>
+          </span>
+        </button>
 
         {/* Desktop Navigation */}
 
         <nav
           className="
-          hidden
-          lg:flex
+            hidden
+            lg:flex
 
-          items-center
-
-          gap-9
+            items-center
+            gap-9
           "
         >
-          <a
-            className="
-            text-sm
-            text-text-secondary
-
-            hover:text-text-primary
-
-            transition
-
-            cursor-pointer
-            "
-          >
-            Analyzer
-          </a>
-
-          <a
-            className="
-            text-sm
-            text-text-secondary
-
-            hover:text-text-primary
-
-            transition
-
-            cursor-pointer
-            "
-          >
-            Learning
-          </a>
-
           <button
+            onClick={() => scrollToSection("how-it-works")}
             className="
-            flex
-            items-center
-            gap-1
+              text-sm
+              text-text-secondary
 
-            text-sm
-            text-text-secondary
+              hover:text-text-primary
 
-            hover:text-text-primary
-
-            transition
+              transition
             "
           >
-            Resources
-            <ChevronDown size={15} />
+            How It Works
           </button>
 
-          <a
+          <button
+            onClick={() => scrollToSection("features")}
             className="
-            text-sm
-            text-text-secondary
+              text-sm
+              text-text-secondary
 
-            hover:text-text-primary
+              hover:text-text-primary
 
-            transition
-
-            cursor-pointer
+              transition
             "
           >
-            About
-          </a>
+            Features
+          </button>
+
+          <button
+            onClick={() => scrollToSection("learning")}
+            className="
+              text-sm
+              text-text-secondary
+
+              hover:text-text-primary
+
+              transition
+            "
+          >
+            Learn
+          </button>
         </nav>
 
         {/* Actions */}
 
         <div
           className="
-          flex
-          items-center
-          gap-4
+            flex
+            items-center
+            gap-4
           "
         >
+          {/* Sign In */}
+
           <button
             onClick={() => navigate("/login")}
             className="
-            hidden
-            sm:block
+              hidden
+              sm:block
 
-            text-sm
+              text-sm
+              font-medium
 
-            text-text-primary
+              text-text-primary
 
-            hover:text-primary
+              hover:text-primary
 
-            transition
+              transition
             "
           >
             Sign In
           </button>
 
+          {/* Get Started */}
+
           <button
             onClick={() => navigate("/register")}
             className="
-                px-6
-                py-2.5
+              hidden
+              sm:block
 
-                rounded-xl
+              px-6
+              py-2.5
 
-                bg-primary
+              rounded-xl
 
-                text-white
+              bg-primary
 
-                text-sm
+              text-white
 
-                font-medium
+              text-sm
+              font-medium
 
-                hover:bg-primary-hover
+              hover:bg-primary-hover
 
-                transition
+              transition
 
-                shadow-lg
-
-                shadow-primary/20
-                "
+              shadow-lg
+              shadow-primary/20
+            "
           >
             Get Started
           </button>
@@ -212,10 +219,13 @@ function Navbar() {
           <button
             onClick={() => setOpenMenu(!openMenu)}
             className="
-            lg:hidden
+              lg:hidden
 
-            text-text-primary
+              text-text-primary
+
+              p-1
             "
+            aria-label="Toggle navigation menu"
           >
             {openMenu ? <X size={26} /> : <Menu size={26} />}
           </button>
@@ -236,83 +246,120 @@ function Navbar() {
 
             border-t
             border-border/50
-
-            space-y-5
-            "
+          "
         >
-          <a
+          <div
             className="
-              block
-
-              text-text-secondary
-
-              hover:text-text-primary
-
-              transition
-              "
+              flex
+              flex-col
+              gap-5
+            "
           >
-            Analyzer
-          </a>
+            <button
+              onClick={() => scrollToSection("how-it-works")}
+              className="
+                text-left
 
-          <a
-            className="
-              block
+                text-text-secondary
 
-              text-text-secondary
+                hover:text-text-primary
 
-              hover:text-text-primary
-
-              transition
+                transition
               "
-          >
-            Learning
-          </a>
+            >
+              How It Works
+            </button>
 
-          <a
-            className="
-              block
+            <button
+              onClick={() => scrollToSection("features")}
+              className="
+                text-left
 
-              text-text-secondary
+                text-text-secondary
 
-              hover:text-text-primary
+                hover:text-text-primary
 
-              transition
+                transition
               "
-          >
-            Resources
-          </a>
+            >
+              Features
+            </button>
 
-          <a
-            className="
-              block
+            <button
+              onClick={() => scrollToSection("learning")}
+              className="
+                text-left
 
-              text-text-secondary
+                text-text-secondary
 
-              hover:text-text-primary
+                hover:text-text-primary
 
-              transition
+                transition
               "
-          >
-            About
-          </a>
+            >
+              Learn
+            </button>
 
-          <button
-            className="
-              w-full
+            <div
+              className="
+                pt-4
 
-              py-3
+                border-t
+                border-border/50
 
-              rounded-lg
-
-              bg-primary
-
-              text-white
-
-              font-medium
+                flex
+                flex-col
+                gap-3
               "
-          >
-            Get Started
-          </button>
+            >
+              <button
+                onClick={() => {
+                  navigate("/login");
+                  setOpenMenu(false);
+                }}
+                className="
+                  w-full
+                  py-3
+
+                  rounded-xl
+
+                  border
+                  border-border
+
+                  text-text-primary
+
+                  font-medium
+                "
+              >
+                Sign In
+              </button>
+
+              <button
+                onClick={() => {
+                  navigate("/register");
+                  setOpenMenu(false);
+                }}
+                className="
+                  w-full
+                  py-3
+
+                  rounded-none
+
+                  bg-primary
+
+                  text-white
+
+                  font-medium
+
+                  hover:bg-primary-hover
+
+                  transition
+                "
+              >
+                Get Started
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </header>
