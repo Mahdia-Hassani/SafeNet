@@ -22,7 +22,6 @@ function AssistantWindow({ open, onClose, messages, loading, sendMessage }) {
         bottom-24
         right-6
         z-50
-
         flex
         flex-col
 
@@ -34,11 +33,7 @@ function AssistantWindow({ open, onClose, messages, loading, sendMessage }) {
 
         overflow-hidden
 
-        rounded-none
-
-        border
-        border-border
-
+        rounded-lg
         bg-card
 
         shadow-sm
@@ -127,6 +122,7 @@ function AssistantWindow({ open, onClose, messages, loading, sendMessage }) {
                 border-border
                 bg-card
                 p-5
+                rounded-lg
               "
             >
               <h3
@@ -163,7 +159,7 @@ function AssistantWindow({ open, onClose, messages, loading, sendMessage }) {
                   border-border
 
                   bg-card
-
+                  rounded-lg
                   p-4
 
                   text-left
@@ -188,17 +184,13 @@ function AssistantWindow({ open, onClose, messages, loading, sendMessage }) {
 
                   border
                   border-border
-
+                  rounded-lg
                   bg-card
-
                   p-4
-
                   text-left
                   text-sm
                   text-text-primary
-
                   transition
-
                   hover:border-primary/30
                   hover:bg-primary
                 "
@@ -217,6 +209,7 @@ function AssistantWindow({ open, onClose, messages, loading, sendMessage }) {
 
                   border
                   border-border
+                  rounded-lg
 
                   bg-card
 

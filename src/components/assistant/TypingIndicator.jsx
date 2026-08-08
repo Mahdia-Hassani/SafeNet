@@ -29,6 +29,7 @@ function TypingIndicator() {
         className="
           border
           border-border
+          rounded-lg
 
           bg-card
 

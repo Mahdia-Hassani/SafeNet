@@ -74,15 +74,10 @@ function Navbar() {
             className="
               w-11
               h-11
-
               flex
               items-center
               justify-center
-
               rounded-full
-
-              border
-              border-primary/0
             "
           >
             <ShieldCheck size={40} className="text-primary" />
@@ -194,7 +189,7 @@ function Navbar() {
               px-6
               py-2.5
 
-              rounded-xl
+              rounded-lg
 
               bg-primary
 
@@ -321,7 +316,7 @@ function Navbar() {
                   w-full
                   py-3
 
-                  rounded-xl
+                  rounded-lg
 
                   border
                   border-border
@@ -343,7 +338,7 @@ function Navbar() {
                   w-full
                   py-3
 
-                  rounded-none
+                  rounded-lg
 
                   bg-primary
 

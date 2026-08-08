@@ -273,28 +273,28 @@ function Login() {
               type="submit"
               disabled={loading}
               className="
-  w-full
+                  w-full
 
-  mt-2
+                  mt-2
 
-  py-3
+                  py-3
 
-  rounded-xl
+                  rounded-lg
 
-  bg-primary
+                  bg-primary
 
-  text-white
+                  text-white
 
-  font-medium
+                  font-medium
 
-  hover:bg-primary-hover
+                  hover:bg-primary-hover
 
-  transition
+                  transition
 
-  disabled:opacity-50
+                  disabled:opacity-50
 
-  disabled:cursor-not-allowed
-  "
+                  disabled:cursor-not-allowed
+                  "
             >
               {loading ? "Signing In..." : "Login"}
             </button>

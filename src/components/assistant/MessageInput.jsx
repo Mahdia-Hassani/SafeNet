@@ -44,9 +44,9 @@ function MessageInput({ onSend }) {
 
             border
             border-border
-
+            rounded-lg
             bg-surface
-
+            
             px-5
             py-3
 
@@ -77,6 +77,7 @@ function MessageInput({ onSend }) {
               bg-primary
 
               text-white
+              rounded-lg
 
               transition
 

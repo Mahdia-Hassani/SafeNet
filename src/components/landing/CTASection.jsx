@@ -110,15 +110,10 @@ function CTASection() {
             className="
             px-7
             py-3
-
-            rounded-xl
-
+            rounded-lg
             bg-primary
-
             text-white
-
             hover:bg-primary-hover
-
             transition
             "
           >
@@ -133,7 +128,7 @@ function CTASection() {
             px-7
             py-3
 
-            rounded-xl
+            rounded-lg
 
             border
 

@@ -279,7 +279,7 @@ function QuickAnalyzer() {
                 px-7
                 py-3
 
-                rounded-xl
+                rounded-lg
 
                 bg-primary
 

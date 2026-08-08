@@ -61,20 +61,13 @@ function Footer() {
                 className="
                 w-11
                 h-11
-
-                rounded-xl
-
-                bg-primary/10
-
-                border
-                border-primary/30
-
+                rounded-full
                 flex
                 items-center
                 justify-center
                 "
               >
-                <ShieldCheck size={26} className="text-primary" />
+                <ShieldCheck size={30} className="text-primary" />
               </div>
 
               <h2
