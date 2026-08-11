@@ -12,9 +12,16 @@ The goal of SafeNet is to reduce the risk of phishing attacks, online scams, ide
 
 ## Live Demo
 
-![Demo live](https://safenet.ms-hassani-mail.workers.dev/)
+Live Demo: https://safenet.ms-hassani-mail.workers.dev/
 
-![Demo Video](https://www.youtube.com/watch?v=z-6D_7iR5Bg)
+Demo Video: https://www.youtube.com/watch?v=z-6D_7iR5Bg&feature=youtu.be
+
+![Hero](ScreanShots/hero.png)
+![Quick Analyzer](ScreanShots/quickAnalyzer.png)
+![Learning Path](ScreanShots/LearningPath.png)
+![How it's Work](ScreanShots/HSW.png)
+![RegisterForm](ScreanShots/RegisterForm.png)
+![Dashboard](ScreanShots/Dashboard.png)
 
 ---
 
@@ -112,7 +119,7 @@ Includes:
 
 - Cloudflare Workers & Pages
 
-## Development Tools
+##Development Tools
 
 - npm
 - Git
@@ -120,9 +127,9 @@ Includes:
 
 ---
 
-### Getting Started
+# Getting Started
 
-# Prerequisites
+Prerequisites
 
 Before running SafeNet locally, make sure you have:
 
@@ -130,13 +137,13 @@ Before running SafeNet locally, make sure you have:
 - npm Installed
 - Git Installed
 
-### Installation
+# Installation
 
-# Clone the repository:
+Clone the repository:
 
 git clone https://github.com/Mahdia-Hassani/SafeNet.git
 
-# Navigate to the project directory:
+Navigate to the project directory:
 
 cd SafeNet
 
@@ -150,20 +157,22 @@ npm run dev
 
 Vite will provide a local development URL in the terminal.
 
-### Environment Variables
+# Environment Variables
 
-# SafeNet uses environment variables for external services such as Supabase and OpenRouter.
+SafeNet uses environment variables for external services such as Supabase and OpenRouter.
 
 Create a .env file in the project root:
 
-VITE_SUPABASE_URL=your_supabase_url VITE_SUPABASE_ANON_KEY=your_supabase_anon_key VITE_OPENROUTER_API_KEY=your_openrouter_api_key
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_OPENROUTER_API_KEY=your_openrouter_api_key
 
-# Important: Never commit your .env file or private API keys to GitHub.
+Important: Never commit your .env file or private API keys to GitHub.
 
 For deployment, configure the required environment variables through the deployment platform instead of storing them in the repository.
 
-### Project Information
+# Project Information
 
-# SafeNet was developed as a web development and cybersecurity awareness project, combining frontend development, AI integration, authentication, and interactive educational features into a single platform.
+SafeNet was developed as a web development and cybersecurity awareness project, combining frontend development, AI integration, authentication, and interactive educational features into a single platform.
 
-# The project focuses on making cybersecurity awareness simple, practical, and accessible for everyday internet users.
+The project focuses on making cybersecurity awareness simple, practical, and accessible for everyday internet users.
