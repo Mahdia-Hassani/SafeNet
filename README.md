@@ -17,11 +17,9 @@ Live Demo: https://safenet.ms-hassani-mail.workers.dev/
 Demo Video: https://www.youtube.com/watch?v=z-6D_7iR5Bg&feature=youtu.be
 
 ![Hero](ScreanShots/hero.png)
-![Quick Analyzer](ScreanShots/quickAnalyzer.png)
 ![Learning Path](ScreanShots/LearningPath.png)
 ![How it's Work](ScreanShots/HSW.png)
 ![RegisterForm](ScreanShots/RegisterForm.png)
-![Dashboard](ScreanShots/Dashboard.png)
 
 ---
 
