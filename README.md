@@ -12,7 +12,9 @@ The goal of SafeNet is to reduce the risk of phishing attacks, online scams, ide
 
 ## Live Demo
 
-🔗 https://safenet.ms-hassani-mail.workers.dev/
+![Demo live](https://safenet.ms-hassani-mail.workers.dev/)
+
+![Demo Video](https://www.youtube.com/watch?v=z-6D_7iR5Bg)
 
 ---
 
@@ -87,15 +89,19 @@ Includes:
 ## Frontend
 
 - React
+- Javascript
 - Vite
 - Tailwind CSS
 - React Router
 
-## Backend / Services
+## Authentication & Database
 
 - Supabase Authentication
 - Supabase Database
-- OpenRouter API (AI Analysis)
+
+## AI
+
+- openRouter API
 
 ## Storage
 
@@ -105,3 +111,59 @@ Includes:
 ## Deployment
 
 - Cloudflare Workers & Pages
+
+## Development Tools
+
+- npm
+- Git
+- Github
+
+---
+
+### Getting Started
+
+# Prerequisites
+
+Before running SafeNet locally, make sure you have:
+
+- Node.js Installed
+- npm Installed
+- Git Installed
+
+### Installation
+
+# Clone the repository:
+
+git clone https://github.com/Mahdia-Hassani/SafeNet.git
+
+# Navigate to the project directory:
+
+cd SafeNet
+
+Install the project dependencies:
+
+npm install
+
+Start the development server:
+
+npm run dev
+
+Vite will provide a local development URL in the terminal.
+
+### Environment Variables
+
+# SafeNet uses environment variables for external services such as Supabase and OpenRouter.
+
+Create a .env file in the project root:
+
+VITE_SUPABASE_URL=your_supabase_url VITE_SUPABASE_ANON_KEY=your_supabase_anon_key VITE_OPENROUTER_API_KEY=your_openrouter_api_key
+
+# Important: Never commit your .env file or private API keys to GitHub.
+
+For deployment, configure the required environment variables through the deployment platform instead of storing them in the repository.
+
+### Project Information
+
+# SafeNet was developed as a web development and cybersecurity awareness project, combining frontend development, AI integration, authentication, and interactive educational features into a single platform.
+
+# The project focuses on making cybersecurity awareness simple, practical, and accessible for everyday internet users.
