@@ -11,7 +11,7 @@ import Assistant from "../components/assistant/Assistant";
 
 function Home() {
   return (
-    <>
+    <> 
       <Navbar />
       <Hero />
       <QuickAnalyzer />

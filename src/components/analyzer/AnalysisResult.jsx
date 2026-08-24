@@ -13,23 +13,23 @@ function AnalysisResult({ analysis }) {
   const riskStyle =
     risk === "high"
       ? {
-          bg: "bg-red-50",
-          border: "border-red-200",
-          text: "text-red-600",
-          icon: <ShieldAlert size={36} />,
+          bg: "bg-red-500/5",
+          border: "border-red-500/20",
+          text: "text-red-400",
+          icon: <ShieldAlert size={28} />,
         }
       : risk === "medium"
         ? {
-            bg: "bg-amber-50",
-            border: "border-amber-200",
-            text: "text-amber-600",
-            icon: <AlertTriangle size={36} />,
+            bg: "bg-amber-500/5",
+            border: "border-amber-500/20",
+            text: "text-amber-400",
+            icon: <AlertTriangle size={28} />,
           }
         : {
-            bg: "bg-surface",
-            border: "border-border",
-            text: "text-green-600",
-            icon: <ShieldCheck size={36} />,
+            bg: "bg-green-500/5",
+            border: "border-green-500/20",
+            text: "text-green-400",
+            icon: <ShieldCheck size={28} />,
           };
 
   return (
@@ -44,7 +44,7 @@ function AnalysisResult({ analysis }) {
           p-6
           `}
       >
-        <div className="flex items-center gap-5 bg-surface border border-border">
+        <div className="flex items-center gap-4">
           <div className={riskStyle.text}>{riskStyle.icon}</div>
 
           <div>
